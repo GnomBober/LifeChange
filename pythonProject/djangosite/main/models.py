@@ -1,5 +1,7 @@
 from django.db import models
 from enum import Enum
+from django.contrib.auth.models import User
+
 
 class Tags(Enum):
     C_SHARP = 'C#'
@@ -44,7 +46,7 @@ class Tag(models.Model):
         return self.name
 
 class Course(models.Model):
-    title = models.CharField('Название', max_length=100)
+    title = models.CharField(max_length=100)
 
     # Выбираем уровень сложности через CharField
     difficulty_level = models.CharField(
@@ -65,3 +67,19 @@ class Course(models.Model):
 
     # Связь многие ко многим с моделью Tag
     tags = models.ManyToManyField(Tag, related_name='courses', blank=True)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")  # Связь с пользователем
+    name = models.CharField(max_length=100)  # Имя пользователя
+    age = models.PositiveIntegerField(null=True, blank=True)  # Возраст
+    city = models.CharField(max_length=100, null=True, blank=True)  # Город
+    photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)  # Фото профиля
+
+    # Связи с курсами
+    completed_courses = models.ManyToManyField(Course, related_name="completed_by", blank=True)  # Пройденные курсы
+    current_courses = models.ManyToManyField(Course, related_name="currently_taken_by", blank=True)  # Текущие курсы
+    favorite_courses = models.ManyToManyField(Course, related_name="favorited_by", blank=True)  # Избранные курсы
+
+    def __str__(self):
+        return f"Профиль пользователя {self.user.username}"
