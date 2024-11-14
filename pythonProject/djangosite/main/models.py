@@ -44,6 +44,8 @@ class Tag(models.Model):
         return self.name
 
 class Course(models.Model):
+    title = models.CharField('Название', max_length=100)
+
     # Выбираем уровень сложности через CharField
     difficulty_level = models.CharField(
         max_length=20,
@@ -63,6 +65,3 @@ class Course(models.Model):
 
     # Связь многие ко многим с моделью Tag
     tags = models.ManyToManyField(Tag, related_name='courses', blank=True)
-
-    def __str__(self):
-        return f"Курс {self.difficulty_level} на {self.language}"
