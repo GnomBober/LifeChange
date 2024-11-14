@@ -1,0 +1,32 @@
+<!-- search.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск курсов</title>
+</head>
+<body>
+    <h1>Поиск курсов</h1>
+
+    <!-- Форма поиска -->
+    <form method="get" action="{% url 'search' %}">
+        <label for="query">Поиск:</label>
+        <input type="text" id="query" name="query" placeholder="Введите запрос">
+        <button type="submit">Поиск</button>
+    </form>
+
+    <!-- Отображение результатов -->
+    {% if query %}
+        <h2>Результаты для "{{ query }}":</h2>
+        {% if results %}
+            <ul>
+                {% for course in results %}
+                    <li>{{ course.title }} - {{ course.description }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Ничего не найдено.</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
