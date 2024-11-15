@@ -1,0 +1,38 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+    <div class="container-fluid w-100 p-3" style="background-color: #0E241C;">
+        <img src="{% static 'main/img/lifechange.png' %}" class ="small-image">
+    <a class="navbar-brand" href="/">LifeChange</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a class="nav-link"  href="#">Каталог</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="/teaching">Преподавание</a>
+        </li>
+      </ul>
+        <div class="btn-search" style="margin-top:17px;">
+            <form method="get" action="{% url 'search' %}">
+                <input type="text" name="query" placeholder="Введите название курса" value="{{ query }}">
+                <button type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+        <div class ="profile">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class = "nav-item">
+                    <a class = "nav-link" href="/profile">Регистрация</a>
+                </li>
+                <li class="nav-item">
+                    <a class = "nav-link" href="/profile">Вход</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

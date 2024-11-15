@@ -1,0 +1,68 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Course page{% endblock %}
+
+{% block links %}
+    <link rel = "stylesheet" href = "{% static 'main/css/course.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="header-course">
+    <div class="left-description">
+        <h2>Название курса</h2>
+        <p>Описание курса, что хдесь проходят, чему научат и так далее. Чтобы было нагляднее, я добавлю рандомный текст,
+        так что вот так.</p>
+    </div>
+      <div class="right-description">
+          <img src="https://www.nopcommerce.com/images/thumbs/0020089_1sbuhgalteri.png" alt="Avatar" style="width:50%">
+          <p><i class="fa-regular fa-user"> 100</i>
+        <i class="fa-regular fa-clock"> 20 ч</i></p>
+      </div>
+  </div>
+
+<div class="main-course">
+    <div class="course-promo">
+        <h3>Чему вы научитесь на курсе</h3>
+        <i class="fa-solid fa-star">Пункты плюсов курса</i><br>
+        <i class="fa-solid fa-star">Пункты плюсов курса</i><br>
+        <i class="fa-solid fa-star">Пункты плюсов курса</i><br>
+        <i class="fa-solid fa-star">Пункты плюсов курса</i><br>
+        <i class="fa-solid fa-star">Пункты плюсов курса</i>
+        <div class="about">
+            <h3>О курсе</h3>
+            <p>Курсе посвящен такому-то продукту с такими темами</p>
+            <i class="fa-solid fa-check">Пункты</i><br>
+            <i class="fa-solid fa-check">Пункты</i><br>
+            <i class="fa-solid fa-check">Пункты</i><br>
+            <i class="fa-solid fa-check">Пункты</i><br>
+            <i class="fa-solid fa-check">Пункты</i>
+        </div>
+        <div class="program-course">
+            <h3>Программа курса</h3>
+            <h4>1.Глава</h4>
+            <p>Тема 1</p>
+            <p>Тема 1</p>
+            <p>Тема 1</p>
+            <h4>2.Глава</h4>
+            <p>Тема 1</p>
+            <p>Тема 1</p>
+            <p>Тема 1</p>
+        </div>
+    </div>
+
+    <div class="right-btns">
+        <div class="btns">
+            <button class="buy">Купить курс</button>
+            <button class="like"><i class="fa-solid fa-heart"> Добавить в избранное</i></button>
+        </div>
+        <div class="about-course">
+            <h3>В курс входит</h3>
+            <h4>10 уроков</h4>
+            <h4>5 тестов</h4>
+        </div>
+
+</div>
+    </div>
+
+{% endblock %}

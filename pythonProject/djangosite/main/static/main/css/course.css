@@ -1,0 +1,111 @@
+h1 {
+margin-top: 10px;
+    margin-left: 50px;
+    font-size: 40px;
+    color: black;
+}
+.navbar {
+    margin-top: -10px;
+}
+
+
+.nav-link{
+    font-size: 19px;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 25px;
+    color: white;
+}
+
+
+.small-image {
+    width: 40px;
+    height: auto;
+}
+
+.header-course {
+    display:flex;
+    justify-content: space-between;
+    background-color: #EAFFD9;
+}
+
+.left-description {
+    width: 70%;
+    padding-top:35px;
+    padding-left:25px;
+}
+.right-description {
+    padding-left:450px;
+}
+p {
+
+}
+
+.main-course {
+    padding-left:100px;
+    padding-right:100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.course-promo {
+
+    width:50%;
+    padding-top:50px;
+}
+
+.about {
+    position:relative;
+    top:100px;
+}
+
+.program-course {
+    font-size:20px;
+    padding-top:150px;
+}
+
+.right-btns {
+padding-top:50px;
+width: 50%;
+}
+
+.btns {
+
+}
+
+.buy {
+width: 300px;
+height: 45px;
+margin:  10px auto 10px auto;
+    display:flex;
+    justify-content:center;
+    background-color: #04AA6D;
+  color: white;
+  padding-top: 10px;
+  padding-bottom:10px;
+
+  bottom: 50px;
+  border: none;
+  border-radius:10px;
+}
+.like {
+width: 300px;
+height: 45px;
+margin:  10px auto 10px auto;
+
+    display:flex;
+    justify-content:center;
+  color: #FF0000 ;
+  border: 2px solid #FF0000;
+  padding-top: 10px;
+  padding-bottom:10px;
+  bottom: 40px;
+  border-radius:10px;
+}
+.about-course {
+margin: 20px 0 0 0 ;
+text-align: center;
+}

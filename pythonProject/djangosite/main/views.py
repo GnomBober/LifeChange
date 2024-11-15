@@ -4,10 +4,13 @@ from django import forms
 from .forms import SearchForm
 
 def mainpage(request):
-    return render(request, 'main/search.html')
+    return render(request, 'main/index.html')
 
 def profile(request):
-    return render(request, '')
+    return render(request, 'main/profile_page.html')
+
+def course(request):
+    return  render(request, 'main/course.html')
 
 def search_view(request):
     form = SearchForm(request.GET or None)

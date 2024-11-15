@@ -1,0 +1,198 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Main page{% endblock %}
+
+{% block links %}
+    <link rel = "stylesheet" href = "{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <h1>{{title}}</h1>
+<div class="main">
+<div class="filter">
+    <div class="filter-difficult">
+        <h3>Уровень сложности</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+            <label class="form-check-label" for="flexCheckDefault">Для начинающих</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2">
+            <label class="form-check-label" for="flexCheckChecked">Для уверенных</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3">
+            <label class="form-check-label" for="flexCheckChecked">Для профи</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4">
+            <label class="form-check-label" for="flexCheckChecked">Для всех</label>
+        </div>
+    </div>
+
+
+
+    <div class="card-conteiner">
+        <div class="card-content">
+        <h2>Цена</h2>
+
+        <div data-range="#third" data-value-1="#second" data-value-0="#first" class="slider">
+      <label class="label-min-value">0</label>
+      <label class="label-max-value">10 000</label>
+        </div>
+        <div class="rangeslider">
+      <input class="min input-ranges" name="range_1" type="range" min="0" max="10000" value="0">
+      <input class="max input-ranges" name="range_1" type="range" min="0" max="10000" value="10000">
+        </div>
+      <div class="filter-next">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+            <label class="form-check-label" for="flexCheckDefault">Бесплатно</label>
+        </div>
+    </div>
+  </div>
+</div>
+
+    <div class="filter-language" style="margin-top:160px;">
+        <h3>Язык</h3>
+         <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">Русский</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6">
+            <label class="form-check-label" for="flexCheckChecked">Английский</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <label class="form-check-label" for="flexCheckChecked">Любой</label>
+        </div>
+    </div>
+</div>
+
+<!--    <div class="carousel-container">-->
+<!--        <button class="carousel-btn left">&larr;</button>-->
+<!--        <div class="carousel">-->
+<!--            <div class="carousel-track">-->
+<!--                <div class="test-card">Курс 1</div>-->
+<!--                <div class="test-card">Курс 2</div>-->
+<!--                <div class="test-card">Курс 3</div>-->
+<!--                <div class="test-card">Курс 4</div>-->
+<!--                <div class="test-card">Курс 5</div>-->
+<!--                <div class="test-card">Курс 6</div>-->
+<!--                <div class="test-card">Курс 7</div>-->
+<!--                <div class="test-card">Курс 8</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <button class="carousel-btn right">&larr;</button>-->
+<!--    </div>-->
+
+<!--<div class="carousel" data-flickity='{ "groupCells": true }'>-->
+
+
+<!--карточка товара-->
+
+<!--<a href="profile" style="color:black">-->
+<!--<div class="mycard">-->
+<!--    <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >-->
+<!--    <div class="mycontainter">-->
+<!--        <h3><b>Название курса</b></h3>-->
+<!--        <h4>Автор курса</h4>-->
+<!--        <p><i class="fa-solid fa-user"> 100</i>-->
+<!--        <i class="fa-solid fa-clock"> 20 ч</i></p>-->
+<!--            <h4 class="price"><b>999 ₽</b></h4>-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--</a>-->
+
+    <div class="body-course">
+    <div class="list-choice fixed">
+        <a class="link"  href="#">Новые курсы</a>
+        <a class="link"  href="#">Хиты</a>
+        <a class="link"  href="#">Популярное</a>
+        <a class="link"  href="#">Рекомендуем</a>
+        <hr>
+    </div>
+    <div class="card-scroll">
+<!-- Flickity HTML init -->
+<div class="carousel" data-flickity='{ "groupCells": true }'>
+<a class="a" href="course" >
+  <div class="carousel-cell">
+      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
+    <div class="mycontainter">
+        <h3><b>Название курса</b></h3>
+        <h4>Автор курса</h4>
+        <p><i class="fa-solid fa-user"> 100</i>
+        <i class="fa-solid fa-clock"> 20 ч</i></p>
+            <h4 class="price"><b>999 ₽</b></h4>
+
+    </div>
+  </div>
+</a>
+  <a class="a" href="course" >
+  <div class="carousel-cell">
+      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
+    <div class="mycontainter">
+        <h3><b>Название курса</b></h3>
+        <h4>Автор курса</h4>
+        <p><i class="fa-solid fa-user"> 100</i>
+        <i class="fa-solid fa-clock"> 20 ч</i></p>
+            <h4 class="price"><b>999 ₽</b></h4>
+
+    </div>
+  </div>
+</a>
+  <a class="a" href="course" >
+  <div class="carousel-cell">
+      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
+    <div class="mycontainter">
+        <h3><b>Название курса</b></h3>
+        <h4>Автор курса</h4>
+        <p><i class="fa-solid fa-user"> 100</i>
+        <i class="fa-solid fa-clock"> 20 ч</i></p>
+            <h4 class="price"><b>999 ₽</b></h4>
+
+    </div>
+  </div>
+</a>
+  <a class="a" href="course" >
+  <div class="carousel-cell">
+      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
+    <div class="mycontainter">
+        <h3><b>Название курса</b></h3>
+        <h4>Автор курса</h4>
+        <p><i class="fa-solid fa-user"> 100</i>
+        <i class="fa-solid fa-clock"> 20 ч</i></p>
+            <h4 class="price"><b>999 ₽</b></h4>
+
+    </div>
+  </div>
+</a>
+  <a class="a" href="course" >
+  <div class="carousel-cell">
+      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
+    <div class="mycontainter">
+        <h3><b>Название курса</b></h3>
+        <h4>Автор курса</h4>
+        <p><i class="fa-solid fa-user"> 100</i>
+        <i class="fa-solid fa-clock"> 20 ч</i></p>
+            <h4 class="price"><b>999 ₽</b></h4>
+
+    </div>
+  </div>
+</a>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+  <div class="carousel-cell"></div>
+</div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
