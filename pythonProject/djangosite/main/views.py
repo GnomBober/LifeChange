@@ -18,4 +18,4 @@ def search_view(request):
         query = form.cleaned_data['query']
         results = Course.objects.filter(title__icontains=query) | Course.objects.filter(description__icontains=query)
 
-    return render(request, 'search.html', {'form': form, 'query': query, 'results': results})
+    return render(request, 'main/search.html', {'form': form, 'query': query, 'results': results})

@@ -1,29 +1,66 @@
-<!-- search.html -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Поиск курсов</title>
+    <style>
+        .course-title {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .course-info {
+            opacity: 0.8;
+            font-style: italic;
+        }
+        .course-description {
+            margin-top: 10px;
+        }
+        .course {
+            margin-bottom: 30px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .course img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Поиск курсов</h1>
 
     <!-- Форма поиска -->
     <form method="get" action="{% url 'search' %}">
-        <label for="query">Поиск:</label>
-        <input type="text" id="query" name="query" placeholder="Введите запрос">
+        <input type="text" name="query" placeholder="Введите название курса" value="{{ query }}">
         <button type="submit">Поиск</button>
     </form>
 
-    <!-- Отображение результатов -->
+    <!-- Результаты поиска -->
     {% if query %}
         <h2>Результаты для "{{ query }}":</h2>
         {% if results %}
-            <ul>
-                {% for course in results %}
-                    <li>{{ course.title }} - {{ course.description }}</li>
-                {% endfor %}
-            </ul>
+            {% for course in results %}
+                <div class="course">
+                    <div class="course-title">{{ course.title }}</div>
+
+                    {% if course.photo %}
+                        <img src="{{ course.photo.url }}" alt="{{ course.title }}">
+                    {% endif %}
+
+                    <div class="course-info">
+                        Сложность: {{ course.get_difficulty_level_display }}<br>
+                        Язык: {{ course.get_language_display }}<br>
+                        Теги: {% for tag in course.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                    </div>
+
+                    <div class="course-description">
+                        <strong>Описание:</strong> {{ course.description }}
+                    </div>
+                </div>
+            {% endfor %}
         {% else %}
             <p>Ничего не найдено.</p>
         {% endif %}
