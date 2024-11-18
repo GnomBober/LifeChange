@@ -345,26 +345,49 @@ position:absolute;
     transform: scale(1.05);
 }
 
-.carousel-indicators button {
-    background-color: #6c757d; /* Цвет точек */
-}
-
-.carousel-indicators .active {
-    background-color: #343a40; /* Цвет активной точки */
-}
-
+/* Стили для прямоугольных кнопок переключения карусели */
 .carousel-control-prev, .carousel-control-next {
-    width: 5%;  /* Устанавливаем ширину кнопок */
-    height: 100%; /* Развернутые по высоте */
-    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для кнопок */
+    width: 40px;  /* Ширина кнопок */
+    height: 100%; /* Растягиваем кнопки на всю высоту */
+    background-color: rgba(0, 0, 0, 0.3); /* Исходный тёмный цвет фона кнопок */
+    color: white;  /* Цвет текста */
+    font-size: 30px; /* Размер текста (стрелки) */
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out; /* Плавный переход фона */
+    border: none;  /* Убираем границы */
+    border-radius: 5px; /* Уголки прямоугольных кнопок */
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: white; /* Белые иконки для кнопок */
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+/* Стили для кнопки влево */
+.carousel-control-prev:before {
+    content: "<"; /* Стрелка влево */
+}
+
+/* Стили для кнопки вправо */
+.carousel-control-next:before {
+    content: ">"; /* Стрелка вправо */
+}
+
+/* При наведении на кнопки меняем цвет фона на зелёный */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: #7bc988; /* Зелёный фон при наведении */
+}
+
+/* Стили для изображений и контента курсов */
+.carousel-item img {
+    width: 100%; /* Сделать изображение растянутым по ширине */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+}
+
+.carousel-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.carousel-item p {
+    font-size: 14px;
 }

@@ -75,47 +75,35 @@
     <div class="container mt-5">
     <h1 class="text-center mb-4">Курсы</h1>
     <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Индикаторы -->
-        <div class="carousel-indicators">
-            {% for course in courses %}
-            <button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.first %}active{% endif %}" aria-current="true"
-                    aria-label="Курс {{ forloop.counter }}"></button>
-            {% endfor %}
-        </div>
-
-        <!-- Элементы карусели -->
         <div class="carousel-inner">
             {% for course in courses %}
+            {% if forloop.counter0|divisibleby:3 %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                    <div class="card" style="width: 60%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                        <img src="{{ course.photo.url }}" class="card-img-top" alt="Картинка курса" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ course.title }}</h3>
-                            <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
-                            <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
-                            <p><strong>Теги:</strong>
-                                {% for tag in course.tags.all %}
-                                    <span class="badge bg-secondary">{{ tag.get_name_display }}</span>
-                                {% endfor %}
-                            </p>
-                            <p>{{ course.description }}</p>
-                        </div>
+                <div class="row">
+                {% endif %}
+                    <div class="col-md-4">
+                        <img src="{{ course.photo.url }}" class="d-block w-100" alt="Картинка курса">
+                        <h3>{{ course.title }}</h3>
+                        <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
+                        <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
+                        <p><strong>Теги:</strong>
+                            {% for tag in course.tags.all %}
+                                <span class="badge bg-secondary">{{ tag.name }}</span>
+                            {% endfor %}
+                        </p>
+                        <p>{{ course.description }}</p>
                     </div>
+                {% if forloop.counter|divisibleby:3 or forloop.last %}
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
-
-        <!-- Кнопки управления -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev"
-                style="left: 10px; z-index: 5;">
+        <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Предыдущий</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next"
-                style="right: 10px; z-index: 5;">
+        <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Следующий</span>
         </button>
