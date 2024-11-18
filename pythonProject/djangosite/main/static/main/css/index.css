@@ -345,26 +345,66 @@ position:absolute;
     transform: scale(1.05);
 }
 
-.carousel-indicators button {
-    background-color: #6c757d; /* Цвет точек */
+/* Стили для стрелочек вместо точек */
+.carousel-indicators {
+    position: absolute;
+    bottom: 10px; /* Снизу карусели */
+    left: 50%; /* По центру */
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 1;
 }
 
-.carousel-indicators .active {
-    background-color: #343a40; /* Цвет активной точки */
+.carousel-indicator {
+    background: none;
+    border: none;
+    font-size: 30px; /* Размер стрелочек */
+    color: #000; /* Цвет стрелок */
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s;
 }
 
+.carousel-indicator:hover {
+    color: #007bff; /* Цвет при наведении */
+}
+
+.carousel-arrow {
+    font-size: 30px; /* Размер стрелок */
+    color: #007bff; /* Цвет стрелок */
+}
+
+/* Стили для стрелочек в виде углов */
 .carousel-control-prev, .carousel-control-next {
-    width: 5%;  /* Устанавливаем ширину кнопок */
-    height: 100%; /* Развернутые по высоте */
-    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для кнопок */
+    width: 5%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Темный фон для кнопки */
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%; /* Круглая форма */
+    transition: background-color 0.5s ease-in-out; /* Плавный переход цвета */
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: white; /* Белые иконки для кнопок */
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    font-size: 30px; /* Размер стрелок */
+    color: white; /* Белый цвет стрелок */
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: #d3d3d3; /* Начальный серый цвет */
+    border-radius: 50%; /* Круглая форма */
+    transition: background-color 0.5s ease-in-out; /* Плавный переход цвета */
 }
+
+/* Изменение цвета на зеленый при наведении */
+.carousel-control-prev-icon:hover, .carousel-control-next-icon:hover {
+    background-color: #7bc988; /* Зеленый цвет при наведении */
+}
+
+

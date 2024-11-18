@@ -72,18 +72,9 @@
     </div>
 </div>
 
-    <div class="container mt-5">
+  <div class="container mt-5">
     <h1 class="text-center mb-4">Курсы</h1>
     <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Индикаторы -->
-        <div class="carousel-indicators">
-            {% for course in courses %}
-            <button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
-                    class="{% if forloop.first %}active{% endif %}" aria-current="true"
-                    aria-label="Курс {{ forloop.counter }}"></button>
-            {% endfor %}
-        </div>
-
         <!-- Элементы карусели -->
         <div class="carousel-inner">
             {% for course in courses %}
@@ -108,18 +99,21 @@
             {% endfor %}
         </div>
 
-        <!-- Кнопки управления -->
+        <!-- Кнопки управления (стрелочки с углами) -->
         <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev"
                 style="left: 10px; z-index: 5;">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="carousel-control-prev-icon" aria-hidden="true">&lt;&lt;</span> <!-- Стрелка влево -->
             <span class="visually-hidden">Предыдущий</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next"
                 style="right: 10px; z-index: 5;">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="carousel-control-next-icon" aria-hidden="true">&gt;&gt;</span> <!-- Стрелка вправо -->
             <span class="visually-hidden">Следующий</span>
         </button>
     </div>
 </div>
+
+</div>
+
 </div>
 {% endblock %}
