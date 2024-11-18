@@ -4,7 +4,8 @@ from django import forms
 from .forms import SearchForm
 
 def mainpage(request):
-    return render(request, 'main/index.html')
+    courses = Course.objects.prefetch_related('tags').all()
+    return render(request, 'main/index.html', {'title': 'Курсы', 'courses': courses})
 
 def profile(request):
     return render(request, 'main/profile_page.html')

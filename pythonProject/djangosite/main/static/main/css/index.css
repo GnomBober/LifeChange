@@ -333,3 +333,38 @@ position:absolute;
     justify-content: space-between;
 }
 
+.carousel-inner {
+    text-align: center;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.carousel-indicators button {
+    background-color: #6c757d; /* Цвет точек */
+}
+
+.carousel-indicators .active {
+    background-color: #343a40; /* Цвет активной точки */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;  /* Устанавливаем ширину кнопок */
+    height: 100%; /* Развернутые по высоте */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон для кнопок */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: white; /* Белые иконки для кнопок */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}

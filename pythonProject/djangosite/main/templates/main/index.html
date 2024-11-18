@@ -72,127 +72,54 @@
     </div>
 </div>
 
-<!--    <div class="carousel-container">-->
-<!--        <button class="carousel-btn left">&larr;</button>-->
-<!--        <div class="carousel">-->
-<!--            <div class="carousel-track">-->
-<!--                <div class="test-card">Курс 1</div>-->
-<!--                <div class="test-card">Курс 2</div>-->
-<!--                <div class="test-card">Курс 3</div>-->
-<!--                <div class="test-card">Курс 4</div>-->
-<!--                <div class="test-card">Курс 5</div>-->
-<!--                <div class="test-card">Курс 6</div>-->
-<!--                <div class="test-card">Курс 7</div>-->
-<!--                <div class="test-card">Курс 8</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <button class="carousel-btn right">&larr;</button>-->
-<!--    </div>-->
-
-<!--<div class="carousel" data-flickity='{ "groupCells": true }'>-->
-
-
-<!--карточка товара-->
-
-<!--<a href="profile" style="color:black">-->
-<!--<div class="mycard">-->
-<!--    <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >-->
-<!--    <div class="mycontainter">-->
-<!--        <h3><b>Название курса</b></h3>-->
-<!--        <h4>Автор курса</h4>-->
-<!--        <p><i class="fa-solid fa-user"> 100</i>-->
-<!--        <i class="fa-solid fa-clock"> 20 ч</i></p>-->
-<!--            <h4 class="price"><b>999 ₽</b></h4>-->
-
-<!--    </div>-->
-<!--</div>-->
-<!--</a>-->
-
-    <div class="body-course">
-    <div class="list-choice fixed">
-        <a class="link"  href="#">Новые курсы</a>
-        <a class="link"  href="#">Хиты</a>
-        <a class="link"  href="#">Популярное</a>
-        <a class="link"  href="#">Рекомендуем</a>
-        <hr>
-    </div>
-    <div class="card-scroll">
-<!-- Flickity HTML init -->
-<div class="carousel" data-flickity='{ "groupCells": true }'>
-<a class="a" href="course" >
-  <div class="carousel-cell">
-      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-        <p><i class="fa-solid fa-user"> 100</i>
-        <i class="fa-solid fa-clock"> 20 ч</i></p>
-            <h4 class="price"><b>999 ₽</b></h4>
-
-    </div>
-  </div>
-</a>
-  <a class="a" href="course" >
-  <div class="carousel-cell">
-      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-        <p><i class="fa-solid fa-user"> 100</i>
-        <i class="fa-solid fa-clock"> 20 ч</i></p>
-            <h4 class="price"><b>999 ₽</b></h4>
-
-    </div>
-  </div>
-</a>
-  <a class="a" href="course" >
-  <div class="carousel-cell">
-      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-        <p><i class="fa-solid fa-user"> 100</i>
-        <i class="fa-solid fa-clock"> 20 ч</i></p>
-            <h4 class="price"><b>999 ₽</b></h4>
-
-    </div>
-  </div>
-</a>
-  <a class="a" href="course" >
-  <div class="carousel-cell">
-      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-        <p><i class="fa-solid fa-user"> 100</i>
-        <i class="fa-solid fa-clock"> 20 ч</i></p>
-            <h4 class="price"><b>999 ₽</b></h4>
-
-    </div>
-  </div>
-</a>
-  <a class="a" href="course" >
-  <div class="carousel-cell">
-      <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-        <p><i class="fa-solid fa-user"> 100</i>
-        <i class="fa-solid fa-clock"> 20 ч</i></p>
-            <h4 class="price"><b>999 ₽</b></h4>
-
-    </div>
-  </div>
-</a>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-</div>
-
+    <div class="container mt-5">
+    <h1 class="text-center mb-4">Курсы</h1>
+    <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Индикаторы -->
+        <div class="carousel-indicators">
+            {% for course in courses %}
+            <button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                    class="{% if forloop.first %}active{% endif %}" aria-current="true"
+                    aria-label="Курс {{ forloop.counter }}"></button>
+            {% endfor %}
         </div>
+
+        <!-- Элементы карусели -->
+        <div class="carousel-inner">
+            {% for course in courses %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+                    <div class="card" style="width: 60%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                        <img src="{{ course.photo.url }}" class="card-img-top" alt="Картинка курса" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ course.title }}</h3>
+                            <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
+                            <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
+                            <p><strong>Теги:</strong>
+                                {% for tag in course.tags.all %}
+                                    <span class="badge bg-secondary">{{ tag.get_name_display }}</span>
+                                {% endfor %}
+                            </p>
+                            <p>{{ course.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Кнопки управления -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev"
+                style="left: 10px; z-index: 5;">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Предыдущий</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next"
+                style="right: 10px; z-index: 5;">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Следующий</span>
+        </button>
     </div>
+</div>
 </div>
 {% endblock %}
