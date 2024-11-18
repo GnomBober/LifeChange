@@ -345,14 +345,17 @@ position:absolute;
     transform: scale(1.05);
 }
 
-/* Стили для карусели */
+/* Основные стили для карусели */
 .carousel-item {
-    display: flex;
-    justify-content: space-between; /* Расстояние между курсами */
+    display: grid; /* Используем grid для лучшего контроля */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Делаем курсы адаптивными */
+    gap: 15px; /* Интервал между курсами */
     padding: 10px; /* Отступы от краёв */
 }
 
+/* Для каждого курса */
 .carousel-item .col-md-4 {
+    box-sizing: border-box; /* Учитываем padding в ширине */
     padding: 10px; /* Отступы для курсов */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавление тени */
     border-radius: 8px; /* Скругление углов */
@@ -360,6 +363,14 @@ position:absolute;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
 }
 
+/* Когда экран меньше 768px (мобильные устройства) */
+@media (max-width: 768px) {
+    .carousel-item .col-md-4 {
+        padding: 10px; /* Отступы для мобильных */
+    }
+}
+
+/* При наведении на курс */
 .carousel-item .col-md-4:hover {
     transform: scale(1.05); /* Увеличение при наведении */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
@@ -403,45 +414,62 @@ position:absolute;
     background-color: #7bc988; /* Зелёный фон */
 }
 
-/* Добавление анимации для плавного изменения цвета кнопок */
-.carousel-control-prev, .carousel-control-next {
-    transition: background-color 0.3s ease-in-out;
-}
-
-/* Кнопки карусели с дополнительными стилизациями */
-.carousel-control-prev, .carousel-control-next {
-    width: 50px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Стрелки на кнопках */
-.carousel-control-prev:before {
-    content: "<";
-}
-
-.carousel-control-next:before {
-    content: ">";
-}
-
-/* Стили для колёсиков и контента */
-.carousel-item .col-md-4 {
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для курсов */
+/* Стили для карточки курса */
+.course-card {
+    width: 100%; /* Занимает всю ширину */
+    background-color: white;
     border-radius: 8px;
-    background-color: white; /* Белый фон */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
+    overflow: hidden; /* Обрезать лишнее, чтобы не вылазило */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-/* Плавные изменения */
-.carousel-item .col-md-4:hover {
-    transform: scale(1.05); /* Увеличение элемента при наведении */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Увеличение тени */
+/* Стили для изображения */
+.course-image img {
+    width: 100%;
+    height: 200px; /* Высота изображения */
+    object-fit: cover; /* Заполнение пространства */
+    border-bottom: 2px solid #ddd; /* Лёгкая граница снизу */
+}
+
+/* Информация о курсе (название) */
+.course-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.course-info h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+/* Детали (теги, язык, стоимость) */
+.course-details {
+    padding: 10px;
+    background-color: #f9f9f9;
+    position: absolute;
+    bottom: -100%; /* Панель скрыта по умолчанию */
+    left: 0;
+    right: 0;
+    transition: bottom 0.3s ease;
+}
+
+/* Когда наводишь на карточку */
+.course-card:hover {
+    transform: translateY(-5px); /* Лёгкое движение вверх при наведении */
+}
+
+.course-card:hover .course-details {
+    bottom: 0; /* Показываем панель с дополнительной информацией */
+}
+
+/* Стили для тегов */
+.course-details .badge {
+    margin-right: 5px;
+}
+
+/* Стили для текста внизу */
+.course-details p {
+    margin: 5px 0;
 }

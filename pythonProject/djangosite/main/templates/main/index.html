@@ -4,112 +4,111 @@
 {% block title %}Main page{% endblock %}
 
 {% block links %}
-    <link rel = "stylesheet" href = "{% static 'main/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
 {% endblock %}
 
 {% block content %}
 
-    <h1>{{title}}</h1>
+<h1>{{ title }}</h1>
+
 <div class="main">
-<div class="filter">
-    <div class="filter-difficult">
-        <h3>Уровень сложности</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-            <label class="form-check-label" for="flexCheckDefault">Для начинающих</label>
+    <div class="filter">
+        <div class="filter-difficult">
+            <h3>Уровень сложности</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                <label class="form-check-label" for="flexCheckDefault">Для начинающих</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2">
+                <label class="form-check-label" for="flexCheckChecked">Для уверенных</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3">
+                <label class="form-check-label" for="flexCheckChecked">Для профи</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4">
+                <label class="form-check-label" for="flexCheckChecked">Для всех</label>
+            </div>
         </div>
-        <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2">
-            <label class="form-check-label" for="flexCheckChecked">Для уверенных</label>
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3">
-            <label class="form-check-label" for="flexCheckChecked">Для профи</label>
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4">
-            <label class="form-check-label" for="flexCheckChecked">Для всех</label>
-        </div>
-    </div>
 
-
-
-    <div class="card-conteiner">
-        <div class="card-content">
-        <h2>Цена</h2>
-
-        <div data-range="#third" data-value-1="#second" data-value-0="#first" class="slider">
-      <label class="label-min-value">0</label>
-      <label class="label-max-value">10 000</label>
-        </div>
-        <div class="rangeslider">
-      <input class="min input-ranges" name="range_1" type="range" min="0" max="10000" value="0">
-      <input class="max input-ranges" name="range_1" type="range" min="0" max="10000" value="10000">
-        </div>
-      <div class="filter-next">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
-            <label class="form-check-label" for="flexCheckDefault">Бесплатно</label>
-        </div>
-    </div>
-  </div>
-</div>
-
-    <div class="filter-language" style="margin-top:160px;">
-        <h3>Язык</h3>
-         <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">Русский</label>
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6">
-            <label class="form-check-label" for="flexCheckChecked">Английский</label>
-        </div>
-        <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">Любой</label>
-        </div>
-    </div>
-</div>
-
-    <div class="container mt-5">
-    <h1 class="text-center mb-4">Курсы</h1>
-    <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% for course in courses %}
-            {% if forloop.counter0|divisibleby:3 %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <div class="row">
-                {% endif %}
-                    <div class="col-md-4">
-                        <div class="course-card">
-                            <img src="{{ course.photo.url }}" class="d-block w-100" alt="Картинка курса">
-                            <h3>{{ course.title }}</h3>
-                            <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
-                            <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
-                            <p><strong>Теги:</strong>
-                                {% for tag in course.tags.all %}
-                                    <span class="badge bg-secondary">{{ tag.name }}</span>
-                                {% endfor %}
-                            </p>
-                            <p>{{ course.description }}</p>
-                        </div>
+        <div class="card-container">
+            <div class="card-content">
+                <h2>Цена</h2>
+                <div data-range="#third" data-value-1="#second" data-value-0="#first" class="slider">
+                    <label class="label-min-value">0</label>
+                    <label class="label-max-value">10 000</label>
+                </div>
+                <div class="rangeslider">
+                    <input class="min input-ranges" name="range_1" type="range" min="0" max="10000" value="0">
+                    <input class="max input-ranges" name="range_1" type="range" min="0" max="10000" value="10000">
+                </div>
+                <div class="filter-next">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault5">
+                        <label class="form-check-label" for="flexCheckDefault">Бесплатно</label>
                     </div>
-                {% if forloop.counter|divisibleby:3 or forloop.last %}
                 </div>
             </div>
-            {% endif %}
-            {% endfor %}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Предыдущий</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Следующий</span>
-        </button>
+
+        <div class="filter-language" style="margin-top:160px;">
+            <h3>Язык</h3>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Русский</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6">
+                <label class="form-check-label" for="flexCheckChecked">Английский</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Любой</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Курсы</h1>
+        <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for course in courses %}
+                {% if forloop.counter0|divisibleby:3 %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row">
+                {% endif %}
+                        <div class="col-md-4">
+                            <div class="course-card">
+                                <img src="{{ course.photo.url }}" class="d-block w-100" alt="Картинка курса">
+                                <h3>{{ course.title }}</h3>
+                                <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
+                                <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
+                                <p><strong>Теги:</strong>
+                                    {% for tag in course.tags.all %}
+                                        <span class="badge bg-secondary">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </p>
+                                <p>{{ course.description }}</p>
+                            </div>
+                        </div>
+                {% if forloop.counter|divisibleby:3 or forloop.last %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предыдущий</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следующий</span>
+            </button>
+        </div>
     </div>
 </div>
-</div>
+
 {% endblock %}
