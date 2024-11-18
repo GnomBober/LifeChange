@@ -345,49 +345,103 @@ position:absolute;
     transform: scale(1.05);
 }
 
-/* Стили для прямоугольных кнопок переключения карусели */
+/* Стили для карусели */
+.carousel-item {
+    display: flex;
+    justify-content: space-between; /* Расстояние между курсами */
+    padding: 10px; /* Отступы от краёв */
+}
+
+.carousel-item .col-md-4 {
+    padding: 10px; /* Отступы для курсов */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавление тени */
+    border-radius: 8px; /* Скругление углов */
+    background-color: white; /* Белый фон для курсов */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
+}
+
+.carousel-item .col-md-4:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Увеличение тени при наведении */
+}
+
+/* Стили для изображений */
+.carousel-item img {
+    width: 100%; /* Изображение на всю ширину курса */
+    height: auto; /* Высота автоматически подстраивается */
+    border-radius: 8px; /* Скругление углов изображения */
+}
+
+/* Стили для кнопок */
 .carousel-control-prev, .carousel-control-next {
-    width: 40px;  /* Ширина кнопок */
+    width: 50px; /* Ширина кнопок */
     height: 100%; /* Растягиваем кнопки на всю высоту */
-    background-color: rgba(0, 0, 0, 0.3); /* Исходный тёмный цвет фона кнопок */
-    color: white;  /* Цвет текста */
-    font-size: 30px; /* Размер текста (стрелки) */
+    background-color: rgba(0, 0, 0, 0.3); /* Тёмный фон кнопок */
+    color: white; /* Белый текст */
+    font-size: 30px; /* Размер стрелок */
     font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: background-color 0.3s ease-in-out; /* Плавный переход фона */
-    border: none;  /* Убираем границы */
-    border-radius: 5px; /* Уголки прямоугольных кнопок */
+    transition: background-color 0.3s ease-in-out; /* Плавный переход */
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругленные углы */
 }
 
-/* Стили для кнопки влево */
+/* Стрелки на кнопках */
 .carousel-control-prev:before {
     content: "<"; /* Стрелка влево */
 }
 
-/* Стили для кнопки вправо */
 .carousel-control-next:before {
     content: ">"; /* Стрелка вправо */
 }
 
-/* При наведении на кнопки меняем цвет фона на зелёный */
+/* При наведении на кнопки */
 .carousel-control-prev:hover, .carousel-control-next:hover {
-    background-color: #7bc988; /* Зелёный фон при наведении */
+    background-color: #7bc988; /* Зелёный фон */
 }
 
-/* Стили для изображений и контента курсов */
-.carousel-item img {
-    width: 100%; /* Сделать изображение растянутым по ширине */
-    height: auto; /* Автоматическая высота для сохранения пропорций */
+/* Добавление анимации для плавного изменения цвета кнопок */
+.carousel-control-prev, .carousel-control-next {
+    transition: background-color 0.3s ease-in-out;
 }
 
-.carousel-item h3 {
-    font-size: 18px;
+/* Кнопки карусели с дополнительными стилизациями */
+.carousel-control-prev, .carousel-control-next {
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 30px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.carousel-item p {
-    font-size: 14px;
+/* Стрелки на кнопках */
+.carousel-control-prev:before {
+    content: "<";
+}
+
+.carousel-control-next:before {
+    content: ">";
+}
+
+/* Стили для колёсиков и контента */
+.carousel-item .col-md-4 {
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тени для курсов */
+    border-radius: 8px;
+    background-color: white; /* Белый фон */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
+}
+
+/* Плавные изменения */
+.carousel-item .col-md-4:hover {
+    transform: scale(1.05); /* Увеличение элемента при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Увеличение тени */
 }

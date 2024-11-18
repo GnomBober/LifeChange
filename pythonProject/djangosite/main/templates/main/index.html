@@ -82,16 +82,18 @@
                 <div class="row">
                 {% endif %}
                     <div class="col-md-4">
-                        <img src="{{ course.photo.url }}" class="d-block w-100" alt="Картинка курса">
-                        <h3>{{ course.title }}</h3>
-                        <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
-                        <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
-                        <p><strong>Теги:</strong>
-                            {% for tag in course.tags.all %}
-                                <span class="badge bg-secondary">{{ tag.name }}</span>
-                            {% endfor %}
-                        </p>
-                        <p>{{ course.description }}</p>
+                        <div class="course-card">
+                            <img src="{{ course.photo.url }}" class="d-block w-100" alt="Картинка курса">
+                            <h3>{{ course.title }}</h3>
+                            <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
+                            <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
+                            <p><strong>Теги:</strong>
+                                {% for tag in course.tags.all %}
+                                    <span class="badge bg-secondary">{{ tag.name }}</span>
+                                {% endfor %}
+                            </p>
+                            <p>{{ course.description }}</p>
+                        </div>
                     </div>
                 {% if forloop.counter|divisibleby:3 or forloop.last %}
                 </div>
