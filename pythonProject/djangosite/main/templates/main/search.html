@@ -9,32 +9,44 @@
 
 <div style="margin-top:20px; margin-left:3%;">
     <!-- Результаты поиска -->
+
     {% if query %}
         <h2>Результаты для "{{ query }}":</h2>
-            <div style="flex-grow: 1; display: flex; gap: 5px">
+    <div class="column-search">
+            <div style="flex-grow: 1; gap: 5px">
                 {% if results %}
                 {% for course in results %}
+                <a class="a" href="course" >
                     <div class="course">
-                        <div class="course-title">{{ course.title }}</div>
-
-                        {% if course.photo %}
+                        <div class="course-right">
+                            {% if course.photo %}
                             <img src="{{ course.photo.url }}" alt="{{ course.title }}">
-                        {% endif %}
-
-                        <div class="course-info">
+                            {% endif %}
+                        </div>
+                        <div class="course-left">
+                            <div class="course-title">{{ course.title }}</div>
+                            <div class="course-info">
                             Сложность: {{ course.get_difficulty_level_display }}<br>
                             Язык: {{ course.get_language_display }}<br>
-                            Теги: {% for tag in course.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
-                        </div>
 
+                        </div>
                         <div class="course-description">
-                            <strong>Описание:</strong> {{ course.description }}
+                             <strong>Описание:</strong>
+                                {{ course.description }}
+                        </div>
+                            <p style="margin: 10px 0 0 0; font-weight:500; font-size: 14px; color:black;    ">{% for tag in course.tags.all %}
+                                {{ tag.name }}
+                                {% if not forloop.last %},
+                                {% endif %}
+                                {% endfor %}</p>
                         </div>
                     </div>
+                </a>
                 {% endfor %}
             {% else %}
                 <p>Ничего не найдено.</p>
             {% endif %} </div>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

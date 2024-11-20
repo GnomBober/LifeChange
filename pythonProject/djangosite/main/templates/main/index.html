@@ -5,10 +5,10 @@
 
 {% block links %}
     <link rel = "stylesheet" href = "{% static 'main/css/index.css' %}">
+
 {% endblock %}
 
 {% block content %}
-
     <h1>{{title}}</h1>
 <div class="main">
 <div class="filter">
@@ -58,19 +58,38 @@
     <div class="filter-language" style="margin-top:160px;">
         <h3>Язык</h3>
          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault6">
             <label class="form-check-label" for="flexCheckDefault">Русский</label>
         </div>
         <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked7">
             <label class="form-check-label" for="flexCheckChecked">Английский</label>
         </div>
         <div>
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked8">
             <label class="form-check-label" for="flexCheckChecked">Любой</label>
         </div>
     </div>
+
+    <div class="tags">
+        <h3>Теги</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault9">
+            <label class="form-check-label" for="flexCheckDefault">C#</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked10">
+            <label class="form-check-label" for="flexCheckChecked">Python</label>
+        </div>
+        <div>
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked11">
+            <label class="form-check-label" for="flexCheckChecked">Java</label>
+        </div>
+    </div>
 </div>
+
+
+
 
 <!--    <div class="carousel-container">-->
 <!--        <button class="carousel-btn left">&larr;</button>-->
@@ -187,12 +206,11 @@
   <div class="carousel-cell"></div>
   <div class="carousel-cell"></div>
   <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
-  <div class="carousel-cell"></div>
 </div>
 
         </div>
     </div>
 </div>
+
+<script src="{% static 'main/js/toggle-btn.js'%}"></script>
 {% endblock %}
