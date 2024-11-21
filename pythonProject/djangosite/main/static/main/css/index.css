@@ -80,14 +80,14 @@ margin-top:-20px;
 
 
 .filter-difficult {
-    position:absolute;
-    margin-top:20px;
+    position:relative;
+    margin-top:10%;
     left: 55px;
 
 }
 .filter-language {
-    position:absolute;
-    margin-top:370px;
+    position:relative;
+    top:4%;
     left: 55px;
 
 }
@@ -95,15 +95,12 @@ margin-top:-20px;
 width:30%;
 }
 
-.laguage-course {
-    position: relative;
-    top:175px;
-
-}
-
 .btn-search {
 display: flex;
     justify-content: center;
+    position:relative;
+    width: 500px;
+    left: 15%;
 }
 
 .navbar {
@@ -122,8 +119,7 @@ position:absolute;
 
 .card-content {
   width: 100%;
-  max-width: 312px;
-  padding: 36px 32px;
+  padding: 8px 32px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0px 0px rgba(18, 22, 33, .12);
@@ -254,8 +250,6 @@ position:absolute;
     margin-top:50%;
     margin: 0 auto;
     overflow: hidden;
-
-
 }
 
 .carousel {
@@ -266,19 +260,11 @@ position:absolute;
    grid-template-columns: repeat(3, 1fr);
 
   gap: 10px;
-
-
-
 }
-
-
-
 
 /* external css: flickity.css */
 
 * { box-sizing: border-box; }
-
-
 
 .carousel {
   background: #FFF;
@@ -296,7 +282,6 @@ position:absolute;
     border-radius: 5px;
   counter-increment: carousel-cell;
    text-decoration:none;
-
 }
 
 .carousel-cell:hover {
@@ -305,19 +290,18 @@ position:absolute;
 
 .carousel-cell.is-selected {
   background: #ED2;
-
 }
-
 
 .body-course {
-
 }
+
 .body-course::-webkit-scrollbar {
     dispay:none;
 }
+
 .card-scroll {
     width:100%;
-    height:420px;
+    height:40%;
     overflow:auto;
 }
 
@@ -333,24 +317,107 @@ position:absolute;
     justify-content: space-between;
 }
 
-.carousel-inner {
-    text-align: center;
+.btn-search input[type="text"] {
+    width:70%;
+     max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: none;
+    background-color: #e9f5e9;
+    transition: all 0.3s ease;
 }
 
-.card {
-    transition: transform 0.3s ease-in-out;
+.btn-search input[type="text"]: hover {
+background-color: #d4edda;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.btn-search button {
+    background-color: #28a745;
+    position: relative;
+    color: #fff;
+    border: none;
+    width: 20%;
+    height:90%;
+    padding 10px 20px;
+    border-radius: 5px;
+    font-size:16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-search button:hover {
+    background-color: #218838;
+}
+
+form {
+    width: 100%;
+}
+
+.tags {
+position: relative;
+
+    left: 55px;
+    top:10%;
+}
+
+.column-search {
+    padding: 20px 25px;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.course {
+    padding: 20px;
+    display:flex;
+    justify-content: space between;
+      width: 100%;
+  height: 250px;
+  margin: 10px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);
+    transition:0.3s;
+    border-radius: 5px;
+  counter-increment: carousel-cell;
+   text-decoration:none;
+}
+
+.course:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+}
+
+.course-right {
+    width:20%;
+}
+
+.course-right img {
+    width:80%;
+}
+
+.course-left {
+    width:80%;
+}
+
+.course-description {
+    display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.course-title {
+    font-size:24px;
+    font-weight: 500;
 }
 
 /* Основные стили для карусели */
 .carousel-item {
-    display: grid; /* Используем grid для лучшего контроля */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Делаем курсы адаптивными */
+    display: grid; /* Используем grid для контроля расположения */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Курс занимает 250px и больше, если возможно */
     gap: 15px; /* Интервал между курсами */
     padding: 10px; /* Отступы от краёв */
+    position: relative; /* Контекст для кнопок */
+    width: 100%; /* Растягиваем контейнер на всю ширину */
 }
 
 /* Для каждого курса */
@@ -361,12 +428,13 @@ position:absolute;
     border-radius: 8px; /* Скругление углов */
     background-color: white; /* Белый фон для курсов */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
+    display: inline-block; /* Курсы должны располагаться в строку */
 }
 
 /* Когда экран меньше 768px (мобильные устройства) */
 @media (max-width: 768px) {
     .carousel-item .col-md-4 {
-        padding: 10px; /* Отступы для мобильных */
+        flex: 0 0 100%; /* На мобильных устройствах карточки занимают всю ширину */
     }
 }
 
@@ -398,15 +466,41 @@ position:absolute;
     transition: background-color 0.3s ease-in-out; /* Плавный переход */
     border: none; /* Убираем границу */
     border-radius: 5px; /* Скругленные углы */
+    z-index: 10; /* Устанавливаем кнопки поверх карусели */
+    padding: 10px; /* Внутренние отступы */
+    position: absolute; /* Абсолютное позиционирование внутри карусели */
+    top: 50%; /* Центрируем кнопки по вертикали */
+    transform: translateY(-50%); /* Смещение для точного центрирования */
 }
 
-/* Стрелки на кнопках */
+/* Расположение кнопок */
+.carousel-control-prev {
+    left: 10px; /* Отступ слева */
+}
+
+.carousel-control-next {
+    right: 10px; /* Отступ справа */
+}
+
+/* Убираем встроенные иконки Bootstrap */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none; /* Полное отключение встроенных иконок */
+}
+
+/* Добавляем стрелки с помощью content */
 .carousel-control-prev:before {
     content: "<"; /* Стрелка влево */
+    font-size: 24px; /* Размер стрелки */
+    display: inline-block; /* Убедимся, что стрелка отображается корректно */
+    line-height: 1; /* Исправляем выравнивание */
 }
 
 .carousel-control-next:before {
     content: ">"; /* Стрелка вправо */
+    font-size: 24px; /* Размер стрелки */
+    display: inline-block; /* Убедимся, что стрелка отображается корректно */
+    line-height: 1; /* Исправляем выравнивание */
 }
 
 /* При наведении на кнопки */
