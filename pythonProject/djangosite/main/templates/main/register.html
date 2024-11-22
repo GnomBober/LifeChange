@@ -4,14 +4,42 @@
 {% block title %}Main page{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
 {% endblock %}
 
 {% block content %}
-<h2>Регистрация</h2>
+<div style="text-align: center;">
+
+
+<h2 style="margin:30px 0 30px 0;">Регистрация</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
+    <div class="form-reg">
+
+    {{ form.username }}
+
+
+    {{ form.password1 }}
+
+
+    {{ form.password2 }}
+
+
+    {{ form.name }}
+
+    </div>
+    <button type="submit" class="reg">Зарегистрироваться </button>
+    <div class="login-lostpass">
+        <a href="/login" class="login">
+            <div class="login">
+                <p>Не новичок?</p>
+                <span>Вход здесь!</span>
+            </div>
+        </a>
+        <div class="lost-pass">
+            <span class="lost-pass">Забыл пароль?</span>
+        </div>
+    </div>
 </form>
+</div>
 {% endblock %}

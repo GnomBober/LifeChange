@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .forms import RegistrationForm
 
 urlpatterns = [
     path('', views.mainpage, name = 'home'),

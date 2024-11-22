@@ -69,8 +69,51 @@
             </div>
         </div>
     </div>
+    <div class="container mt-5" style="width: 1000px;">
+        <h1 class="text-center mb-4">Курсы</h1>
 
-    <div class="container mt-5">
+        <div class="carousel-inner" id="statistic-table">
+
+                {% for course in courses %}
+
+          <ul class="car-item ">
+            <li class="course-cardd">
+                                <img src="{{ course.photo.url }}" class="d-block w-100;" alt="Картинка курса">
+                                <h3>{{ course.title }}</h3>
+                                <p><strong>Сложность:</strong> {{ course.get_difficulty_level_display }}</p>
+                                <p><strong>Язык:</strong> {{ course.get_language_display }}</p>
+                                <p><strong>Теги:</strong>
+                                    {% for tag in course.tags.all %}
+                                        <span class="badge bg-secondary">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </p>
+                            </li>
+          </ul>
+
+                {% endfor %}
+
+</div>
+<script>
+    (function() {
+
+    function scrollHorizontally(e) {
+        e = window.event || e;
+        var delta = Math.max(-5, Math.min(5, (e.wheelDelta || -e.detail)));
+        document.getElementById('statistic-table').scrollLeft -= (delta*10); // Multiplied by 10
+        e.preventDefault();
+    }
+    if (document.getElementById('statistic-table').addEventListener) {
+        // IE9, Chrome, Safari, Opera
+        document.getElementById('statistic-table').addEventListener("mousewheel", scrollHorizontally, false);
+
+    }
+
+})();
+</script>
+
+
+    </div>
+    <!--<div class="container mt-5">
         <h1 class="text-center mb-4">Курсы</h1>
         <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -107,7 +150,8 @@
                 <span class="visually-hidden">Следующий</span>
             </button>
         </div>
-    </div>
+    </div>-->
+
 </div>
 
 {% endblock %}

@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegistrationForm
 from django.contrib.auth import logout
+from django.forms import TextInput, PasswordInput
 
 def mainpage(request):
     courses = Course.objects.prefetch_related('tags').all()
@@ -41,15 +42,38 @@ def register(request):
     return render(request, 'main/register.html', {'form': form})
 
 # Логин пользователя
+# def user_login(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(data=request.POST)
+#         if form.is_valid():
+#             user = form.get_user()
+#             login(request, user)
+#             return redirect('home')  # Редирект на домашнюю страницу
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'main/login.html', {'form': form})
+
 def user_login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # Редирект на домашнюю страницу
+        form = AuthenticationForm(request, data=request.POST)
     else:
         form = AuthenticationForm()
+
+    # Изменение атрибутов полей формы
+    form.fields['username'].widget = TextInput(attrs={
+        'class': 'username',
+        'placeholder': 'Имя пользователя',
+    })
+    form.fields['password'].widget = PasswordInput(attrs={
+        'class': 'pass',
+        'placeholder': 'Пароль',
+    })
+
+    if request.method == 'POST' and form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        return redirect('home')  # Редирект на домашнюю страницу
+
     return render(request, 'main/login.html', {'form': form})
 
 # Выход пользователя

@@ -87,7 +87,7 @@ margin-top:-20px;
 }
 .filter-language {
     position:relative;
-    top:4%;
+    top: -25%;
     left: 55px;
 
 }
@@ -119,7 +119,7 @@ position:absolute;
 
 .card-content {
   width: 100%;
-  padding: 8px 32px;
+  padding: 64px 32px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0px 0px rgba(18, 22, 33, .12);
@@ -179,7 +179,7 @@ position:absolute;
 
 .input-ranges[type='range']::-webkit-slider-runnable-track {
   width: 200px;
-  height: 1px;
+  height: 2px;
   background: var(--color-headline);
 }
 
@@ -191,7 +191,7 @@ position:absolute;
   position: relative;
   height: 15px;
   width: 15px;
-  margin-top: -7px;
+  margin-top: -2px;
   background: #fff;
   border: 1px solid var(--color-headline);
   border-radius: 25px;
@@ -254,12 +254,12 @@ position:absolute;
 
 .carousel {
     overflow: hidden;
-    width:100%;
-   display:grid;
+    width:50%;
+   display:inline-block;
 
-   grid-template-columns: repeat(3, 1fr);
 
-  gap: 10px;
+
+
 }
 
 /* external css: flickity.css */
@@ -369,7 +369,7 @@ position: relative;
 .course {
     padding: 20px;
     display:flex;
-    justify-content: space between;
+    justify-content: space-between;
       width: 100%;
   height: 250px;
   margin: 10px;
@@ -412,13 +412,60 @@ position: relative;
 
 /* Основные стили для карусели */
 .carousel-item {
-    display: grid; /* Используем grid для контроля расположения */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Курс занимает 250px и больше, если возможно */
-    gap: 15px; /* Интервал между курсами */
+
+     /* Используем grid для контроля расположения */
+     /* Курс занимает 250px и больше, если возможно */
+     /* Интервал между курсами */
     padding: 10px; /* Отступы от краёв */
-    position: relative; /* Контекст для кнопок */
+     /* Контекст для кнопок */
     width: 100%; /* Растягиваем контейнер на всю ширину */
 }
+.carousel-inner {
+scroll-snap-type: both mandatory;
+scroll-behavior: auto;
+overflow: hidden;
+flex: 1;
+display: grid;
+grid-gap: 24px;
+    margin: 0;
+
+        grid-template-columns: repeat(2, 324px);
+    grid-auto-flow: column;
+}
+.car-item {
+    width: 300px;
+    list-style: none;
+    direction: ltr;
+}
+.course-cardd {
+
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition:0.3s;
+    border-radius: 5px;
+    width: 250px;
+overflow: hidden;
+
+}
+.course-cardd img {
+    height: 250px;
+    width:250px;
+
+}
+
+.course-cardd:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+.horizontal-scroller__scroll-btn horizontal-scroller__scroll-btn_left st-button_style_none {
+pointer-events: auto;
+    opacity: 1;
+    cursor: pointer;
+    position: absolute;
+}
+.container mt-5 {
+max-width: 1080px;
+}
+
+
 
 /* Для каждого курса */
 .carousel-item .col-md-4 {
@@ -428,7 +475,7 @@ position: relative;
     border-radius: 8px; /* Скругление углов */
     background-color: white; /* Белый фон для курсов */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавные анимации */
-    display: inline-block; /* Курсы должны располагаться в строку */
+    /* Курсы должны располагаться в строку */
 }
 
 /* Когда экран меньше 768px (мобильные устройства) */
@@ -515,7 +562,7 @@ position: relative;
     border-radius: 8px;
     overflow: hidden; /* Обрезать лишнее, чтобы не вылазило */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+
     transition: transform 0.3s ease;
 }
 
@@ -567,3 +614,6 @@ position: relative;
 .course-details p {
     margin: 5px 0;
 }
+
+
+

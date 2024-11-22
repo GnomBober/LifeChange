@@ -1,4 +1,9 @@
 {% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/header.css' %}">
+{% endblock %}
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary ">
     <div class="container-fluid w-100 p-3" style="background-color: #0E241C;">
         <img src="{% static 'main/img/lifechange.png' %}" class ="small-image">

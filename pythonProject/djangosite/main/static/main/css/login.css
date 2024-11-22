@@ -1,0 +1,133 @@
+.navbar {
+    margin-top: -10px;
+}
+
+
+.nav-link{
+    font-size: 19px;
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 25px;
+    color: white;
+}
+
+
+.small-image {
+    width: 40px;
+    height: auto;
+}
+
+h2 {
+position:
+    left:50%;
+}
+
+.btn-search {
+display: flex;
+    justify-content: center;
+    position:relative;
+    width: 500px;
+    left: 15%;
+}
+
+/*Плейсхолдеры*/
+.username {
+width: 250px;
+
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.pass {
+margin: 10px 0 0 0;
+    top: 10%;
+width: 250px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.conf-pass {
+    position: relative;
+    margin: 10px 0 0 0;
+    top: 10%;
+    width:70%;
+     max-width: 250px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin:
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.name {
+    position: relative;
+    margin: 10px 0 0 0;
+    top: 10%;
+    width:70%;
+     max-width: 250px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin:
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.login{
+    color: gray;
+    padding: 0 20px 0 0;
+    display: inline-block;
+     text-decoration: none;
+}
+.login {
+    display:flex;
+justify-content: space between;
+}
+
+span {
+padding-left: 5px;
+    color: black;
+}
+
+.login-lostpass {
+font-size:14px;
+
+    overline: none;
+    color: gray;
+}
+
+.lost-pass {
+display: inline;
+}
+
+.reg{
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    width: 250px;
+    border-radius: 5px;
+    font-size:16px;
+    cursor: pointer;
+    margin: 20px 0 10px 0;
+    padding: 5px 10px;
+    transition: background-color 0.3s ease;
+}
+.reg:hover {
+    background-color: #218838;
+}
+
+.form-reg {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
