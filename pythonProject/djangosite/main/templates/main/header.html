@@ -4,40 +4,55 @@
     <link rel="stylesheet" href="{% static 'main/css/header.css' %}">
 {% endblock %}
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary ">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid w-100 p-3" style="background-color: #0E241C;">
-        <img src="{% static 'main/img/lifechange.png' %}" class ="small-image">
-    <a class="navbar-brand" href="/">LifeChange</a>
+        <img src="{% static 'main/img/lifechange.png' %}" class="small-image">
+        <a class="navbar-brand" href="/">LifeChange</a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mb-2 mb-lg-0">
-          <li class="nav-item">
-          <a class="nav-link"  href="#">Каталог</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"  href="#">Преподавание</a>
-        </li>
-      </ul>
-        <div class="btn-search" style="margin-top:17px;">
-            <form method="get" action="{% url 'search' %}">
-                <input type="text" name="query" placeholder="Введите название курса" value="{{ query }}">
-               <button type="submit">Поиск</button>
-            </form>
-        </div>
-    </div>
-        <div class ="profile">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class = "nav-item">
-                    <a class = "nav-link" href="/register">Регистрация</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'catalog' %}">Каталог</a>
                 </li>
                 <li class="nav-item">
-                    <a class = "nav-link" href="/login">Вход</a>
+                    <a class="nav-link" href="#">Преподавание</a>
                 </li>
             </ul>
+            <div class="btn-search" style="margin-top:17px;">
+                <form method="get" action="{% url 'search' %}">
+                    <input type="text" name="query" placeholder="Введите название курса" value="{{ query }}">
+                    <button type="submit">Поиск</button>
+                </form>
+            </div>
+        </div>
 
+        <div class="profile">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                    <!-- Для авторизованных пользователей -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link" style="text-decoration: none;">Выход</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- Для гостей -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Вход</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </nav>

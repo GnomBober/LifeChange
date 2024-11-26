@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Main page{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+        <h1>Каталог курсов</h1>
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ course.photo.url }}" class="card-img-top" alt="{{ course.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ course.title }}</h5>
+                            <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+                            <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>Курсы не найдены.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

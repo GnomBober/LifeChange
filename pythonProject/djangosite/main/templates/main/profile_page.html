@@ -1,37 +1,91 @@
 {% extends 'main/layout.html' %}
 {% load static %}
 
-{% block title %}Main page{% endblock %}
+{% block title %}Профиль{% endblock %}
 
 {% block links %}
-    <link rel = "stylesheet" href = "{% static 'main/css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="mycourse">
-       <h1>Мои курсы</h1>
-   </div>
-<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" fill="currentColor" class="bi1 bi-person" viewBox="0 0 16 16">
-  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-</svg>
-    <h2>Заводин Евгений</h2>
-    <p>21 год, Казань</p>
-    <div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">
+    <h1>Мои курсы</h1>
+</div>
+
+<!-- Фотография пользователя -->
+<div class="profile-photo">
+    {% if profile.photo %}
+        <img src="{{ profile.photo.url }}" alt="Фото профиля" class="bi-person" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+    {% else %}
+        <p>Нет фотографии</p>
+    {% endif %}
+</div>
+
+<h2>{{ profile.name }}</h2>
+<p>{{ profile.age }} лет, {{ profile.city }}</p>
+
+<!-- Кнопки для отображения курсов -->
+<div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">
     <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
     <label class="btn btn-outline-success" for="vbtn-radio1">Прохожу</label>
     <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
     <label class="btn btn-outline-success" for="vbtn-radio2">Любимые</label>
     <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
     <label class="btn btn-outline-success" for="vbtn-radio3">Законченные</label>
-    </div>
-
-    <a href="profile" style="color:black">
-<div class="mycard">
-    <img src="https://maxsoft.ru/content/images/5eaf32b81f235637b5b0b5a1371d189f.png" alt="Avatar" style="width:50%" >
-    <div class="mycontainter">
-        <h3><b>Название курса</b></h3>
-        <h4>Автор курса</h4>
-    </div>
 </div>
-    </a>
+
+<!-- Отображение курсов -->
+<div class="course-list">
+    <h3>Проходящие курсы</h3>
+    {% if profile.current_courses.exists %}
+        {% for course in profile.current_courses.all %}
+            <a href="{% url 'course_detail' course.id %}" class="course-card">
+                <div class="mycard">
+                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
+                    <div class="mycontainer">
+                        <h3><b>{{ course.title }}</b></h3>
+                        <h4>{{ course.author }}</h4> <!-- или курс может иметь связь с преподавателем -->
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>Нет текущих курсов</p>
+    {% endif %}
+
+    <h3>Избранные курсы</h3>
+    {% if profile.favorite_courses.exists %}
+        {% for course in profile.favorite_courses.all %}
+            <a href="{% url 'course_detail' course.id %}" class="course-card">
+                <div class="mycard">
+                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
+                    <div class="mycontainer">
+                        <h3><b>{{ course.title }}</b></h3>
+                        <h4>{{ course.author }}</h4>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>Нет избранных курсов</p>
+    {% endif %}
+
+    <h3>Завершенные курсы</h3>
+    {% if profile.completed_courses.exists %}
+        {% for course in profile.completed_courses.all %}
+            <a href="{% url 'course_detail' course.id %}" class="course-card">
+                <div class="mycard">
+                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
+                    <div class="mycontainer">
+                        <h3><b>{{ course.title }}</b></h3>
+                        <h4>{{ course.author }}</h4>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>Нет завершенных курсов</p>
+    {% endif %}
+</div>
+
 {% endblock %}

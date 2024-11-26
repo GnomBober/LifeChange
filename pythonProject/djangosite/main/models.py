@@ -76,6 +76,8 @@ class Profile(models.Model):
     city = models.CharField(max_length=100, null=True, blank=True)  # Город
     photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)  # Фото профиля
 
+    isTeacher = models.BooleanField(default=False, verbose_name="Является преподавателем")  # Флаг преподавателя
+
     # Связи с курсами
     completed_courses = models.ManyToManyField(Course, related_name="completed_by", blank=True)  # Пройденные курсы
     current_courses = models.ManyToManyField(Course, related_name="currently_taken_by", blank=True)  # Текущие курсы
