@@ -16,7 +16,8 @@
             <div style="flex-grow: 1; gap: 5px">
                 {% if results %}
                 {% for course in results %}
-                <a class="a" href="course" >
+                <div class="search-course">
+                <a class="a" href="{% url 'course_detail' course.id %}" >
                     <div class="course">
                         <div class="course-right">
                             {% if course.photo %}
@@ -42,6 +43,7 @@
                         </div>
                     </div>
                 </a>
+                </div>
                 {% endfor %}
             {% else %}
                 <p>Ничего не найдено.</p>

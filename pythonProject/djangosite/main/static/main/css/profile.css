@@ -79,6 +79,10 @@ padding-left:15px;
     margin: 70px 100px 0 100px;
     display: flex;
     justify-content: space between;
+    overflow-y: auto;
+}
+body {
+overflow: hidden;
 }
 
 .profile-photo {
@@ -91,6 +95,7 @@ padding-left:15px;
 
 .page-info {
     width: 40%;
+    padding: 10px;
 }
 .course-card {
     display:flex;
