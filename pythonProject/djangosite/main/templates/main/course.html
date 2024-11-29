@@ -4,31 +4,53 @@
 {% block title %}Main page{% endblock %}
 
 {% block links %}
-    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/course.css' %}">
 {% endblock %}
 
 {% block content %}
     <div class="course-detail">
-        <h1>{{ course.title }}</h1>
-        <p><strong>Уровень сложности:</strong> {{ course.difficulty_level }}</p>
-        <p><strong>Цена:</strong> {{ course.price }} ₽</p>
-        <p><strong>Язык:</strong> {{ course.language }}</p>
-        <p><strong>Описание:</strong> {{ course.description }}</p>
 
-        <h3>Теги:</h3>
-        <ul>
-            {% for tag in course.tags.all %}
-                <li>{{ tag.name }}</li>
-            {% empty %}
-                <li>Нет тегов</li>
-            {% endfor %}
-        </ul>
+        <div class="header-info">
 
-        <h3>Фото курса:</h3>
-        {% if course.photo %}
-            <img src="{{ course.photo.url }}" alt="{{ course.title }}" style="width: 50%; max-width: 500px;">
-        {% else %}
-            <p>Фото не доступно</p>
-        {% endif %}
+            <div class="header-title">
+                <h1>{{ course.title }}</h1>
+            </div>
+            <div class="header-photo">
+                {% if course.photo %}
+                    <img src="{{ course.photo.url }}" alt="{{ course.title }} " class="scale">
+                {% else %}
+                    <p>Фото не доступно</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="main-course">
+            <div class="left-description">
+                <div class="desc">
+                  <p><strong>Описание:</strong><br> {{ course.description }}</p>
+                </div>
+                <div class="diff-level">
+                    <p><strong>Уровень сложности:</strong><br> {{ course.difficulty_level }}</p>
+                </div>
+                <div class="language">
+                    <p><strong>Язык:</strong> {{ course.language }}</p>
+                </div>
+
+
+                <h3>Теги:</h3>
+                <ul>
+                    {% for tag in course.tags.all %}
+                        <li>{{ tag.name }}</li>
+                    {% empty %}
+                        <li>Нет тегов</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        <div class="btns">
+            <p>{{ course.price }} ₽</p>
+            <button class="buy">
+            <h3>Купить</h3>
+            </button>
+        </div>
     </div>
+</div>
 {% endblock %}

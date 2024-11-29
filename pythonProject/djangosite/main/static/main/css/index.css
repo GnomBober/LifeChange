@@ -48,8 +48,8 @@ h4.price {
     padding: 2px 8px;
     text-decoration:none;
 }
-.a {
-color:black;
+
+.carousel-inner a {
 text-decoration:none;
 }
 
@@ -436,6 +436,7 @@ grid-gap: 24px;
     width: 300px;
     list-style: none;
     direction: ltr;
+    color:black;
 }
 .course-cardd {
 

@@ -8,6 +8,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegistrationForm
 from django.contrib.auth import logout
 from django.forms import TextInput, PasswordInput
+from django.http import JsonResponse
 
 def mainpage(request):
     courses = Course.objects.prefetch_related('tags').all()
@@ -91,3 +92,33 @@ def course_catalog(request):
     # Получаем все курсы из базы данных
     courses = Course.objects.all()
     return render(request, 'main/catalog.html', {'courses': courses})
+
+
+def filter_courses(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'Пользователь не авторизован'}, status=400)
+
+    profile = Profile.objects.get(user=request.user)
+
+    # Получаем статус, переданный в запросе
+    status = request.GET.get('status', '')
+
+    if status == 'in_progress':
+        courses = profile.current_courses.all()
+    elif status == 'favorite':
+        courses = profile.favorite_courses.all()
+    elif status == 'completed':
+        courses = profile.completed_courses.all()
+    else:
+        return JsonResponse({'error': 'Неизвестный статус'}, status=400)
+
+    # Формируем данные для передачи в ответ
+    course_data = []
+    for course in courses:
+        course_data.append({
+            'id': course.id,
+            'title': course.title,
+            'photo': course.photo.url if course.photo else '',
+        })
+
+    return JsonResponse({'courses': course_data})

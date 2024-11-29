@@ -5,87 +5,170 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock %}
 
 {% block content %}
-<div class="mycourse">
-    <h1>Мои курсы</h1>
+
+<div class="page">
+    <div class="page-info">
+    <!-- Фотография пользователя -->
+    <div class="profile-photo">
+        {% if profile.photo %}
+            <img src="{{ profile.photo.url }}" alt="Фото профиля" class="bi-person" style="width: 200px; height: 20 0px; border-radius: 25%; object-fit: cover;">
+        {% else %}
+            <p>Нет фотографии</p>
+        {% endif %}
+    </div>
+
+    <h2>{{ profile.name }}</h2>
+    <p>Возраст: {{ profile.age }}, {{ profile.city }}</p>
+
+    <!-- Кнопки для отображения курсов -->
+<!--    <div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">-->
+<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>-->
+<!--        <label class="btn btn-outline-success" for="vbtn-radio1">Прохожу</label>-->
+<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">-->
+<!--        <label class="btn btn-outline-success" for="vbtn-radio2">Любимые</label>-->
+<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">-->
+<!--        <label class="btn btn-outline-success" for="vbtn-radio3">Законченные</label>-->
+<!--    </div>-->
+<!--        <div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">-->
+<!--            <button class="btn btn-outline-success" id="btn-in-progress">Прохожу</button>-->
+<!--            <button class="btn btn-outline-success" id="btn-favorite">Любимые</button>-->
+<!--            <button class="btn btn-outline-success" id="btn-completed">Законченные</button>-->
+<!--        </div>-->
+
+        <div class="btns">
+            <button class="buy active"  id="btn-in-progress" onclick="changeButtonState(this)">Прохожу</button>
+            <button class="buy" id="btn-favorite" onclick="changeButtonState(this)">Любимые</button>
+            <button class="buy" id="btn-completed" onclick="changeButtonState(this)">Законченные</button>
+        </div>
+
+
+
+
+<!--    <div class="course-list">-->
+<!--        <h3>Проходящие курсы</h3>-->
+<!--        {% if profile.current_courses.exists %}-->
+<!--            {% for course in profile.current_courses.all %}-->
+<!--                <a href="{% url 'course_detail' course.id %}" class="course-card" >-->
+<!--                    <div class="mycard">-->
+<!--                        <img src="{{ course.photo.url }}" alt="Курс">-->
+<!--                        <div class="mycontainer">-->
+<!--                            <h3><b>{{ course.title }}</b></h3>-->
+<!--                            <h4>{{ course.author }}</h4> &lt;!&ndash; или курс может иметь связь с преподавателем &ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            {% endfor %}-->
+<!--        {% else %}-->
+<!--            <p>Нет текущих курсов</p>-->
+<!--        {% endif %}-->
+
+<!--        <h3>Избранные курсы</h3>-->
+<!--        {% if profile.favorite_courses.exists %}-->
+<!--            {% for course in profile.favorite_courses.all %}-->
+<!--                <a href="{% url 'course_detail' course.id %}" class="course-card">-->
+<!--                    <div class="mycard">-->
+<!--                        <img src="{{ course.photo.url }}" alt="Курс" style="width: 50%; max-width: 200px;">-->
+<!--                        <div class="mycontainer">-->
+<!--                            <h3><b>{{ course.title }}</b></h3>-->
+<!--                            <h4>{{ course.author }}</h4>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            {% endfor %}-->
+<!--        {% else %}-->
+<!--            <p>Нет избранных курсов</p>-->
+<!--        {% endif %}-->
+
+<!--        <h3>Завершенные курсы</h3>-->
+<!--        {% if profile.completed_courses.exists %}-->
+<!--            {% for course in profile.completed_courses.all %}-->
+<!--                <a href="{% url 'course_detail' course.id %}" class="course-card">-->
+<!--                    <div class="mycard">-->
+<!--                        <img src="{{ course.photo.url }}" alt="Курс" style="width: 50%; max-width: 200px;">-->
+<!--                        <div class="mycontainer">-->
+<!--                            <h3><b>{{ course.title }}</b></h3>-->
+<!--                            <h4>{{ course.author }}</h4>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--            {% endfor %}-->
+<!--        {% else %}-->
+<!--            <p>Нет завершенных курсов</p>-->
+<!--        {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+
+    </div>
+
+    <div class="mycourse">
+        <h1>Мои курсы</h1>
+
+    <div id="course-list">
+            <!-- Здесь будут отображаться курсы -->
+        </div>
+    </div>
 </div>
 
-<!-- Фотография пользователя -->
-<div class="profile-photo">
-    {% if profile.photo %}
-        <img src="{{ profile.photo.url }}" alt="Фото профиля" class="bi-person" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
-    {% else %}
-        <p>Нет фотографии</p>
-    {% endif %}
-</div>
+    {% block scripts %}
+    <script>
+        $(document).ready(function() {
 
-<h2>{{ profile.name }}</h2>
-<p>{{ profile.age }} лет, {{ profile.city }}</p>
+            loadCourses('in_progress');
 
-<!-- Кнопки для отображения курсов -->
-<div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">
-    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
-    <label class="btn btn-outline-success" for="vbtn-radio1">Прохожу</label>
-    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
-    <label class="btn btn-outline-success" for="vbtn-radio2">Любимые</label>
-    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
-    <label class="btn btn-outline-success" for="vbtn-radio3">Законченные</label>
-</div>
+            // Обработчики для кнопок
+            $('#btn-in-progress').click(function() {
+                loadCourses('in_progress');
+            });
 
-<!-- Отображение курсов -->
-<div class="course-list">
-    <h3>Проходящие курсы</h3>
-    {% if profile.current_courses.exists %}
-        {% for course in profile.current_courses.all %}
-            <a href="{% url 'course_detail' course.id %}" class="course-card">
-                <div class="mycard">
-                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
-                    <div class="mycontainer">
-                        <h3><b>{{ course.title }}</b></h3>
-                        <h4>{{ course.author }}</h4> <!-- или курс может иметь связь с преподавателем -->
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    {% else %}
-        <p>Нет текущих курсов</p>
-    {% endif %}
+            $('#btn-favorite').click(function() {
+                loadCourses('favorite');
+            });
 
-    <h3>Избранные курсы</h3>
-    {% if profile.favorite_courses.exists %}
-        {% for course in profile.favorite_courses.all %}
-            <a href="{% url 'course_detail' course.id %}" class="course-card">
-                <div class="mycard">
-                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
-                    <div class="mycontainer">
-                        <h3><b>{{ course.title }}</b></h3>
-                        <h4>{{ course.author }}</h4>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    {% else %}
-        <p>Нет избранных курсов</p>
-    {% endif %}
+            $('#btn-completed').click(function() {
+                loadCourses('completed');
+            });
 
-    <h3>Завершенные курсы</h3>
-    {% if profile.completed_courses.exists %}
-        {% for course in profile.completed_courses.all %}
-            <a href="{% url 'course_detail' course.id %}" class="course-card">
-                <div class="mycard">
-                    <img src="{% static 'main/img/course-placeholder.png' %}" alt="Курс" style="width: 50%; max-width: 200px;">
-                    <div class="mycontainer">
-                        <h3><b>{{ course.title }}</b></h3>
-                        <h4>{{ course.author }}</h4>
-                    </div>
-                </div>
-            </a>
-        {% endfor %}
-    {% else %}
-        <p>Нет завершенных курсов</p>
-    {% endif %}
-</div>
+            // Функция для загрузки курсов через AJAX
+            function loadCourses(status) {
+                $.ajax({
+                    url: '{% url "filter_courses" %}',  // URL, который обрабатывает запрос
+                    data: {
+                        'status': status  // Отправляем статус (active, favorite, completed)
+                    },
+                    success: function(response) {
+                        $('#course-list').empty();  // Очищаем список перед загрузкой новых данных
+                        if (response.courses && response.courses.length > 0) {
+                            // Проходим по каждому курсу и добавляем его на страницу
+                            $.each(response.courses, function(index, course) {
+                                $('#course-list').append(`
+                                    <div class="course-card">
+                                        <a href="/course/${course.id}">
+                                            <div class="mycard">
+                                                <img src="${course.photo}" alt="${course.title}" style="width: 50%; max-width: 200px;">
+                                                <div class="mycontainer">
+                                                    <h3><b>${course.title}</b></h3>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                `);
+                            });
+                        } else {
+                            $('#course-list').append('<p>Нет курсов для отображения</p>');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Ошибка загрузки:', error);
+                    }
+                });
+            }
+        });
+    </script>
 
+{% endblock %}
+<script src="{% static 'main/js/btn.js' %}"></script>
 {% endblock %}

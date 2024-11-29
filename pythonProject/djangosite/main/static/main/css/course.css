@@ -26,45 +26,54 @@ margin-top: 10px;
     height: auto;
 }
 
-.header-course {
-    display:flex;
-    justify-content: space-between;
-    background-color: #EAFFD9;
-}
 
-.left-description {
-    width: 70%;
-    padding-top:35px;
-    padding-left:25px;
-}
-.right-description {
-    padding-left:450px;
-}
 p {
 
 }
 
-.main-course {
-    padding-left:100px;
-    padding-right:100px;
+.header-info{
+    position: relative;
+    top:-9px;
+    display:flex;
+    justify-content: space between;
+    background: #1E7153;
+    height:35%;
+}
+.header-photo {
+    width: 35%;
+}
+.scale {
+     display: flex;           /* Включаем Flexbox */
+  justify-content: center; /* Горизонтальное выравнивание по центру */
+  align-items: center;     /* Вертикальное выравнивание по центру */
+  height: 100%;
+    border-radius: 10px;
+    transition: 0.4s;
+}
+
+.scale:hover {
+    transform: scale(1.1);
+}
+.header-title {
+    width: 65%;
     display: flex;
-    justify-content: space-between;
+    padding-left: 50px;
+    align-items: center;
+}
+.header-title h1 {
+    color:white;
+}
+.author {
+
+}
+.author h2 {
+    color: #E9E9E9;
 }
 
-.course-promo {
-
-    width:50%;
-    padding-top:50px;
-}
-
-.about {
-    position:relative;
-    top:100px;
-}
-
-.program-course {
-    font-size:20px;
-    padding-top:150px;
+.main-course {
+    margin: 30px 100px 0 100px;
+    display:flex;
+    justify-content: space between;
 }
 
 .right-btns {
@@ -72,40 +81,98 @@ padding-top:50px;
 width: 50%;
 }
 
-.btns {
 
-}
 
 .buy {
 width: 300px;
 height: 45px;
-margin:  10px auto 10px auto;
+margin:  10px auto 10px 10%;
     display:flex;
     justify-content:center;
     background-color: #04AA6D;
   color: white;
-  padding-top: 10px;
-  padding-bottom:10px;
-
+  align-items: center;
   bottom: 50px;
   border: none;
   border-radius:10px;
+  transition: 0.3s;
+}
+.buy:hover {
+   background-color: #1E7153;
+    transform: scale(1.02);
+
+}
+.buy h3{
+    display:flex;
+    justify-content: center;
+    text-align:center;
 }
 .like {
 width: 300px;
 height: 45px;
-margin:  10px auto 10px auto;
+margin:  10px auto 10px 10%;
 
     display:flex;
     justify-content:center;
-  color: #FF0000 ;
+  color: #FF9D00 ;
+   align-items: center;
   border: 2px solid #FF0000;
   padding-top: 10px;
   padding-bottom:10px;
   bottom: 40px;
   border-radius:10px;
 }
-.about-course {
-margin: 20px 0 0 0 ;
-text-align: center;
+
+
+/* Детали (теги, язык, стоимость) */
+.course-details {
+    padding: 10px;
+    background-color: #f9f9f9;
+    position: absolute;
+    bottom: -100%; /* Панель скрыта по умолчанию */
+    left: 0;
+    right: 0;
+    transition: bottom 0.3s ease;
+}
+
+.left-description {
+    width: 65%;
+    padding-left: 50px;
+
+}
+.btns {
+    width:35%;
+}
+
+.btns p {
+    padding: 0 0 0 10%;
+    display: flex;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.desc p strong{
+    font-size: 28px;
+
+}
+
+.desc {
+padding-bottom: 50px;
+}
+
+.diff-level p strong {
+    font-size: 20px;
+}
+
+.diff-level {
+padding-bottom: 50px;
+}
+
+.language p strong {
+    font-size: 20px;
+}
+
+.language {
+    padding-bottom: 50px;
 }

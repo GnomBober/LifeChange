@@ -75,7 +75,7 @@
         <div class="carousel-inner" id="statistic-table">
 
                 {% for course in courses %}
-
+        <a href="{% url 'course_detail' course.id %}" class="card-link">
           <ul class="car-item ">
             <li class="course-cardd">
                                 <img src="{{ course.photo.url }}" class="d-block w-100;" alt="Картинка курса">
@@ -91,8 +91,9 @@
           </ul>
 
                 {% endfor %}
-
+ </a>
 </div>
+
 <script>
     (function() {
 
