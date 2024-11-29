@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .forms import RegistrationForm
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -13,4 +12,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('catalog/', views.course_catalog, name='catalog'),
     path('filter_courses/', views.filter_courses, name='filter_courses'),
+    path('teaching/', views.teaching_page, name='teaching'),
+    path('payment/', views.payment_view, name='payment')
 ]

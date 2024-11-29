@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Страница преподавания{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+
+    <h2 style="margin:30px 0 30px 0;">Создание курса</h2>
+
+    {% if not user.profile.isTeacher %}
+        <p>Войдите в аккаунт, являющийся преподавателем, чтобы создать курс.</p>
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-reg">
+                <div>
+                    <label for="id_title">Название курса:</label>
+                    {{ form.title }}
+                </div>
+
+                <div>
+                    <label for="id_description">Описание курса:</label>
+                    {{ form.description }}
+                </div>
+
+                <div>
+                    <label for="id_difficulty_level">Уровень сложности:</label>
+                    {{ form.difficulty_level }}
+                </div>
+
+                <div>
+                    <label for="id_price">Цена:</label>
+                    {{ form.price }}
+                </div>
+
+                <div>
+                    <label for="id_language">Язык:</label>
+                    {{ form.language }}
+                </div>
+
+                <div>
+                    <label for="id_photo">Изображение курса:</label>
+                    {{ form.photo }}
+                </div>
+
+                <div>
+                    <label for="id_tags">Теги:</label>
+                    {{ form.tags }}
+                </div>
+
+                <div>
+                    <label for="id_video_url">Ссылка на видео:</label>
+                    {{ form.video_url }}
+                </div>
+
+                <button type="submit" class="reg">Создать курс</button>
+            </div>
+        </form>
+    {% endif %}
+
+    <div class="login-lostpass">
+        <a href="/profile" class="login">
+            <div class="login">
+                <p>Перейти в профиль</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

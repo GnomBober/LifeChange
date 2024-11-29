@@ -1,0 +1,84 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Main page{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div style="width: 100%; max-width: 600px; margin: 0 auto; text-align: center; padding: 30px;">
+    <h1>Выберите способ оплаты</h1>
+
+    <!-- Переключатель для оплаты картой и QR -->
+    <div style="margin-bottom: 20px;">
+        <label>
+            <input type="radio" name="payment_method" value="card" checked> Оплата картой
+        </label>
+        <label>
+            <input type="radio" name="payment_method" value="qr"> Оплата по QR-коду
+        </label>
+    </div>
+
+    <!-- Форма для оплаты картой, изначально показываем эту форму -->
+    <div id="card-form" style="display: block; text-align: left; margin-top: 30px;">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label for="name">Имя на карте:</label>
+                <input type="text" name="name" id="name" style="width: 100%; padding: 10px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="card_number">Номер карты:</label>
+                <input type="tel" name="card_number" id="card_number" style="width: 100%; padding: 10px;" required maxlength="16">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="expiration_date">Срок действия (MM/YY):</label>
+                <input type="tel" name="expiration_date" id="expiration_date" style="width: 100%; padding: 10px;" required maxlength="5">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="cvv">CVV:</label>
+                <input type="password" name="cvv" id="cvv" style="width: 100%; padding: 10px;" required maxlength="3">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" style="width: 100%; padding: 10px;" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="amount">Сумма:</label>
+                <input type="number" name="amount" id="amount" style="width: 100%; padding: 10px;" required step="0.01" min="0">
+            </div>
+            <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+                Оплатить
+            </button>
+        </form>
+    </div>
+
+    <!-- QR-код, изначально показываем его -->
+    <div id="qr-code" style="text-align: center; margin-top: 30px;">
+        <img src="{% static 'main/img/qr.png' %}" alt="QR код" style="width: 200px; height: 200px; object-fit: cover;">
+        <p>Сканируйте этот QR код для оплаты</p>
+    </div>
+</div>
+
+<script>
+    // JavaScript для переключения между картой и QR кодом
+    document.querySelectorAll('input[name="payment_method"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.value === 'card') {
+                // Если выбрана оплата картой - показываем форму для карты
+                document.getElementById('card-form').style.display = 'block';
+                // И скрываем QR код
+                document.getElementById('qr-code').style.display = 'none';
+            } else {
+                // Если выбрана оплата через QR - показываем QR код
+                document.getElementById('card-form').style.display = 'none';
+                // И скрываем форму для карты
+                document.getElementById('qr-code').style.display = 'block';
+            }
+        });
+    });
+</script>
+
+{% endblock %}
