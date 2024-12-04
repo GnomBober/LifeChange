@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Прохождение курса: {{ course.title }}{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Прохождение курса: {{ course.title }}</h1>
+
+<ul>
+    {% for module in modules %}
+    <li>
+        <a href="{% url 'module_detail' module.id %}">{{ module.title }}</a>
+        {% if module.children.all %}
+        <ul>
+            {% for submodule in module.children.all %}
+            <li>
+                <a href="{% url 'module_detail' submodule.id %}">{{ submodule.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

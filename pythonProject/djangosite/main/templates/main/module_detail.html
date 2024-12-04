@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Main page{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>{{ module.title }}</h1>
+<p>{{ module.content }}</p>
+
+{% if submodules %}
+<h2>Подмодули:</h2>
+<ul>
+    {% for submodule in submodules %}
+    <li>
+        <a href="{% url 'module_detail' submodule.id %}">{{ submodule.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Нет подмодулей.</p>
+{% endif %}
+
+<div>
+    <a href="{% url 'course_progress' module.course.id %}" class="btn">Назад к курсу</a>
+</div>
+{% endblock %}

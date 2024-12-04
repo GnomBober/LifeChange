@@ -1,10 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, User
+from .models import Profile, User, Course, Module
 from django.forms import ModelForm, TextInput, PasswordInput
-from .models import Course
-
 
 class SearchForm(forms.Form):
     query = forms.CharField(label='Поиск', max_length=100)
@@ -76,3 +74,8 @@ class PaymentForm(forms.Form):
     cvv = forms.CharField(label='CVV', max_length=3, widget=forms.TextInput(attrs={'type': 'password'}))
     email = forms.EmailField(label='Email')
     amount = forms.DecimalField(label='Сумма', max_digits=10, decimal_places=2)
+
+class ModuleForm(forms.ModelForm):
+    class Meta:
+        model = Module
+        fields = ['title', 'content']

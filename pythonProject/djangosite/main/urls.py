@@ -13,5 +13,8 @@ urlpatterns = [
     path('catalog/', views.course_catalog, name='catalog'),
     path('filter_courses/', views.filter_courses, name='filter_courses'),
     path('teaching/', views.teaching_page, name='teaching'),
-    path('payment/', views.payment_view, name='payment')
+    path('course/<int:id>/edit/', views.edit_course, name='edit_course'),
+    path('course/<int:id>/progress/', views.course_progress, name='course_progress'),
+    path('course/module/<int:id>/', views.module_detail, name='module_detail'),
+    path('payment/<int:course_id>/', views.payment_view, name='payment')
 ]

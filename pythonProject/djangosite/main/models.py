@@ -77,6 +77,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)  # Фото профиля
 
     isTeacher = models.BooleanField(default=False, verbose_name="Является преподавателем")  # Флаг преподавателя
+    created_courses = models.ManyToManyField(Course, related_name="creators", blank=True)
 
     # Связи с курсами
     completed_courses = models.ManyToManyField(Course, related_name="completed_by", blank=True)  # Пройденные курсы
@@ -85,3 +86,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"Профиль пользователя {self.user.username}"
+
+class Module(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='modules')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    title = models.CharField(max_length=255)
+    content = models.TextField(blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)  # Поле для порядка отображения
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title

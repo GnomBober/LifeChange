@@ -44,13 +44,38 @@
                         <li>Нет тегов</li>
                     {% endfor %}
                 </ul>
+                {% if request.user.is_authenticated %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="favorite-toggle">
+                            <label for="favorite">
+                                {% if is_favorite %}
+                                    <input type="checkbox" name="favorite" id="favorite" checked> Любимое
+                                {% else %}
+                                    <input type="checkbox" name="favorite" id="favorite"> Любимое
+                                {% endif %}
+                            </label>
+                        </div>
+                        <button type="submit" style="margin-top: 10px;">Сохранить изменения</button>
+                    </form>
+                {% endif %}
             </div>
         <div class="btns">
-            <p>{{ course.price }} ₽</p>
-            <button class="buy">
-            <a class="nav-link" href="{% url 'payment' %}">Купить</a>
-            </button>
+                {% if has_course %}
+                    <p>Вы уже приобрели этот курс</p>
+                    <a href="{% url 'course_progress' course.id %}" class="buy">
+                        Перейти к прохождению
+                    </a>
+                {% else %}
+                    <a href="{% url 'payment' course.id %}" class="buy">
+                        Купить
+                    </a>
+                {% endif %}
+            </div>
         </div>
+        {% if request.user.is_authenticated and course in request.user.profile.created_courses.all %}
+            <a href="{% url 'edit_course' course.id %}" class="btn btn-edit">Редактировать</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

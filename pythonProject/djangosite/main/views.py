@@ -1,15 +1,11 @@
-from django.shortcuts import render, redirect
-from .models import Course
-from .models import Profile
-from .forms import SearchForm
-from django.contrib.auth import login
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Course, Module, Profile
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegistrationForm
-from django.contrib.auth import logout
 from django.forms import TextInput, PasswordInput
 from django.http import JsonResponse
-from .forms import CourseForm
-from .forms import PaymentForm
+from .forms import CourseForm, ModuleForm, PaymentForm, SearchForm, RegistrationForm
+from django.urls import reverse
 
 def mainpage(request):
     courses = Course.objects.prefetch_related('tags').all()
@@ -19,12 +15,34 @@ def profile_pg(request):
     profile = Profile.objects.get(user=request.user)
     return render(request, 'main/profile_page.html', {'profile': profile})
 
-def coursepg(request, id):  # Убедитесь, что аргумент id передается правильно
-    try:
-        course = Course.objects.get(id=id)  # Получаем курс по id
-    except Course.DoesNotExist:
-        return render(request, '404.html')  # Страница ошибки, если курс не найден
-    return render(request, 'main/course.html', {'course': course})
+def coursepg(request, id):
+    course = get_object_or_404(Course, id=id)
+    profile = Profile.objects.get(user=request.user) if request.user.is_authenticated else None
+
+    # Проверка, есть ли курс в избранном
+    is_favorite = profile.favorite_courses.filter(id=course.id).exists() if profile else False
+    has_course = (
+            profile.favorite_courses.filter(id=course.id).exists() or
+            profile.current_courses.filter(id=course.id).exists() or
+            profile.completed_courses.filter(id=course.id).exists()
+    ) if profile else False
+
+    if request.method == 'POST' and profile:
+        if 'favorite' in request.POST:
+            if is_favorite:
+                # Удаление из избранного
+                profile.favorite_courses.remove(course)
+            else:
+                # Добавление в избранное
+                profile.favorite_courses.add(course)
+            profile.save()
+            return render(request, 'main/course.html', {'course': course})  # Перезагружаем страницу с обновленными данными
+
+    return render(request, 'main/course.html', {
+        'course': course,
+        'is_favorite': is_favorite,
+        'has_course': has_course
+    })
 
 def search_view(request):
     form = SearchForm(request.GET or None)
@@ -133,6 +151,10 @@ def teaching_page(request):
                 course = form.save(commit=False)
                 course.save()
                 form.save_m2m()  # Сохраняем связи для ManyToMany полей
+
+                request.user.profile.created_courses.add(course)
+                request.user.profile.save()
+
                 return redirect('catalog')  # Перенаправляем на каталог после успешного создания
         else:
             form = CourseForm()
@@ -173,16 +195,83 @@ def catalog(request):
 
     return render(request, 'main/catalog.html', context)
 
-def payment_view(request):
-    # Если пользователь отправил форму
-    if request.method == "POST":
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            # Тут можно добавить обработку данных формы, например, создание платежа
-            # Например, если оплата прошла успешно, можно перенаправить на другую страницу
-            return render(request, 'main/payment_success.html')  # Страница успешной оплаты
-    else:
-        # Если это GET-запрос, просто отображаем форму
-        form = PaymentForm()
+from django.shortcuts import get_object_or_404, redirect
+from .models import Course, Profile
 
-    return render(request, 'main/payment.html', {'form': form})
+def payment_view(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+
+    if request.method == 'POST':
+        # После успешной оплаты связываем курс с пользователем
+        if request.user.is_authenticated:
+            profile = Profile.objects.get(user=request.user)
+            profile.current_courses.add(course)
+            profile.save()
+            return render(request, 'main/course.html', {'course': course})  # Перенаправляем обратно на страницу курса
+
+    return render(request, 'main/payment.html', {'course': course})
+
+def edit_course(request, id):
+    profile = Profile.objects.get(user=request.user)
+    course = get_object_or_404(Course, id=id)
+    modules = Module.objects.filter(course=course, parent__isnull=True)  # Модули верхнего уровня
+
+    if course not in profile.created_courses.all():
+        return HttpResponseForbidden("Вы не можете редактировать этот курс, так как вы не являетесь его создателем.")
+
+    # Обработка редактирования модуля
+    module_id = request.GET.get('edit_module')  # Получаем ID модуля, который нужно редактировать
+    module = None
+    form = None
+
+    if module_id:
+        module = get_object_or_404(Module, id=module_id, course=course)
+        form = ModuleForm(request.POST or None, instance=module)
+        if form.is_valid():
+            form.save()
+            return redirect('edit_course', id=course.id)
+
+    # Обработка добавления нового модуля
+    if request.method == 'POST' and not module_id:  # Если не редактируем, а добавляем новый модуль
+        parent_id = request.POST.get('parent_id')
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        parent = Module.objects.get(id=parent_id) if parent_id else None
+
+        # Создаем новый модуль
+        Module.objects.create(course=course, parent=parent, title=title, content=content)
+        return redirect('edit_course', id=course.id)
+
+    return render(request, 'main/edit_course.html', {
+        'course': course,
+        'modules': modules,
+        'form': form,
+        'module': module,
+    })
+
+def course_progress(request, id):
+    course = get_object_or_404(Course, id=id)
+    modules = Module.objects.filter(course=course, parent=None).order_by('order')  # Верхнеуровневые модули
+    return render(request, 'main/course_progress.html', {'course': course, 'modules': modules})
+
+def module_detail(request, id):
+    module = get_object_or_404(Module, id=id)
+    is_creator = course in profile.created_courses.all()
+    submodules = Module.objects.filter(parent=module).order_by('order')  # Дочерние модули
+    return render(request, 'main/module_detail.html', {'module': module, 'submodules': submodules, 'is_creator': is_creator})
+
+def get_course_tree(course):
+    """Функция для получения дерева модулей и подмодулей курса."""
+    modules = Module.objects.filter(course=course, parent=None)
+    tree = []
+    for module in modules:
+        tree.append({
+            'module': module,
+            'children': get_module_children(module)
+        })
+    return tree
+
+def get_module_children(module):
+    """Рекурсивная функция для получения дочерних элементов модуля."""
+    children = module.children.all()
+    return [{'module': child, 'children': get_module_children(child)} for child in children]
