@@ -63,7 +63,29 @@ class CourseForm(forms.ModelForm):
         fields = ['title', 'difficulty_level', 'price', 'language', 'photo', 'description', 'tags']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),  # Удобное отображение для ManyToManyField
-            'description': forms.Textarea(attrs={'rows': 4}),  # Настройка высоты текстового поля
+            'description': forms.Textarea(attrs={
+                'placeholder':'Описание курса',
+                'class':'custom-textarea',
+                'rows': 4}),  # Настройка высоты текстового поля
+
+            'difficulty_level': forms.Select(attrs= {
+                'class':'custom-difficulty',
+                'placeholder':'Уровень сложности',
+            }),
+            'language': forms.Select(attrs= {
+                'class':'custom-language',
+                'placeholder':'Язык',
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': 'custom-price',
+                'placeholder': 'Цена',
+                'step': '0.01',
+            }),
+            'photo': forms.ClearableFileInput(attrs= {
+                'class': 'custom-photo',  # Класс для стилизации
+                'accept': 'image/*',
+
+            }),
         }
 
 

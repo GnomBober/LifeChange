@@ -6,6 +6,7 @@ from django.forms import TextInput, PasswordInput
 from django.http import JsonResponse
 from .forms import CourseForm, ModuleForm, PaymentForm, SearchForm, RegistrationForm
 from django.urls import reverse
+from django.db.models import Q
 
 def mainpage(request):
     courses = Course.objects.prefetch_related('tags').all()
@@ -51,8 +52,8 @@ def search_view(request):
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        results = Course.objects.filter(title__icontains=query) | Course.objects.filter(description__icontains=query) | Course.objects.filter(tags__name__icontains=query)
-
+        results = Course.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(tags__name__icontains=query))
+        print(results)
     return render(request, 'main/search.html', {'form': form, 'query': query, 'results': results})
 
 # Регистрация пользователя

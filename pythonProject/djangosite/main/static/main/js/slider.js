@@ -1,43 +1,41 @@
-const track = document.querySelector('.carousel-track');
-const leftButton = document.querySelector('.carousel-btn.left');
-const rightButton = document.querySelector('.carousel-btn.right');
-const cards = document.querySelectorAll('.test-card');
+const rangeInput = document.querySelectorAll(".range-input input"),
+  priceInput = document.querySelectorAll(".price-input input"),
+  range = document.querySelector(".slider .progress");
+let priceGap = 1000;
 
-const cardWidth = cards[0].offsetWidth + 20; // Ширина карточки с учетом margin
-const visibleCards = 6; // Количество видимых карточек
-let currentPosition = 0; // Начальная позиция
+priceInput.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    let minPrice = parseInt(priceInput[0].value),
+      maxPrice = parseInt(priceInput[1].value);
 
-rightButton.addEventListener('click', () => {
-    const maxPosition = -(cards.length - visibleCards) * cardWidth;
-    currentPosition -= cardWidth * visibleCards;
-    if (currentPosition < maxPosition) {
-        currentPosition = maxPosition; // Остановить на последней группе карточек
+    if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+      if (e.target.className === "input-min") {
+        rangeInput[0].value = minPrice;
+        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+      } else {
+        rangeInput[1].value = maxPrice;
+        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+      }
     }
-    track.style.transform = `translateX(${currentPosition}px)`;
+  });
 });
 
-leftButton.addEventListener('click', () => {
-    currentPosition += cardWidth * visibleCards;
-    if (currentPosition > 0) {
-        currentPosition = 0; // Остановить на первой группе карточек
-    }
-    track.style.transform = `translateX(${currentPosition}px)`;
-});
+rangeInput.forEach((input) => {
+  input.addEventListener("input", (e) => {
+    let minVal = parseInt(rangeInput[0].value),
+      maxVal = parseInt(rangeInput[1].value);
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.test-card');
-    if (cards.length > 0) {
-        const cardWidth = cards[0].offsetWidth + 20;
-        console.log(cardWidth); // Проверьте значение cardWidth
+    if (maxVal - minVal < priceGap) {
+      if (e.target.className === "range-min") {
+        rangeInput[0].value = maxVal - priceGap;
+      } else {
+        rangeInput[1].value = minVal + priceGap;
+      }
     } else {
-        console.log("Карточки не найдены");
+      priceInput[0].value = minVal;
+      priceInput[1].value = maxVal;
+      range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+      range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
     }
+  });
 });
-
-const cards = document.querySelectorAll('.test-card');
-if (cards.length > 0) {
-    const cardWidth = cards[0].offsetWidth + 20;
-    console.log(cardWidth); // Значение ширины первой карточки
-} else {
-    console.log("Карточки с классом 'test-card' не найдены");
-}

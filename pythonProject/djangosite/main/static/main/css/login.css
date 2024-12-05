@@ -131,3 +131,86 @@ display: inline;
     align-items: center;
     flex-direction: column;
 }
+
+.diff-level_language {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name-title input[type="text"] {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.3s ease;
+}
+
+.description textarea[type="text"] {
+    padding: 15px 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.3s ease;
+
+}
+.custom-textarea {
+    width: 20%;
+    padding: 15px;
+    margin-top:15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+.custom-difficulty {
+    width: 15%;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.custom-language {
+    width: 15%;
+    padding: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.custom-price {
+    width: 15%;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.custom-photo {
+    display: none;
+}
+
+/* Стили для кастомной кнопки */
+.custom-photo + .custom-file-label {
+    margin-top:15px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;  /* Цвет фона */
+    color: white;  /* Цвет текста */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Стили для кнопки при наведении */
+.custom-photo + .custom-file-label:hover {
+    background-color: #45a049;
+}
+
+.custom-tags {
+    display: flex;
+    justify-content: space between;
+    max-width: 500px;
+}

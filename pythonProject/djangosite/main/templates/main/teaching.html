@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div style="text-align: center;">
 
     <h2 style="margin:30px 0 30px 0;">Создание курса</h2>
@@ -18,36 +19,27 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-reg">
-                <div>
-                    <label for="id_title">Название курса:</label>
-                    {{ form.title }}
+                <div class="name-title">
+                    <input type="text" name="form.title" placeholder="Введите название курса"  >
+                    </div>
                 </div>
 
-                <div>
-                    <label for="id_description">Описание курса:</label>
+                <div class="description">
                     {{ form.description }}
                 </div>
 
-                <div>
-                    <label for="id_difficulty_level">Уровень сложности:</label>
+                <div class="diff-level_language">
                     {{ form.difficulty_level }}
+                    {{ form.language }}
                 </div>
-
                 <div>
-                    <label for="id_price">Цена:</label>
                     {{ form.price }}
                 </div>
 
                 <div>
-                    <label for="id_language">Язык:</label>
-                    {{ form.language }}
-                </div>
-
-                <div>
-                    <label for="id_photo">Изображение курса:</label>
                     {{ form.photo }}
-                </div>
-
+                   <input type="file" name="photo" class="custom-photo" id="id_photo">
+                    <label for="id_photo" class="custom-file-label" id="file-label">Выберите изображение</label>
                 <div>
                     <label for="id_tags">Теги:</label>
                     {{ form.tags }}
@@ -59,7 +51,7 @@
                 </div>
 
                 <button type="submit" class="reg">Создать курс</button>
-            </div>
+
         </form>
     {% endif %}
 
@@ -71,5 +63,20 @@
         </a>
     </div>
 </div>
+
+<script>
+    const fileInput = document.getElementById('id_photo');
+    const fileLabel = document.getElementById('file-label');
+
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length> 0) {
+        const fileName = fileInput.files[0].name;
+        fileLabel.textContent = fileName;
+        }
+        else {
+        fileLabel.textContent = 'Выберите изображение';
+        }
+        });
+</script>
 
 {% endblock %}

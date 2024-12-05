@@ -144,3 +144,7 @@ background-color: #d4edda;
 .category-2 li {
   margin: 5px 0;
 }
+.sticky {
+    position:sticky;
+    top:0;
+}
