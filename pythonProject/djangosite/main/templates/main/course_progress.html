@@ -9,10 +9,13 @@
 
 {% block content %}
 <h1>Прохождение курса: {{ course.title }}</h1>
+<div class="course-progress">
 
-<ul>
+    <div class="modules-course">
+        <ul>
     {% for module in modules %}
     <li>
+
         <a href="{% url 'module_detail' module.id %}">{{ module.title }}</a>
         {% if module.children.all %}
         <ul>
@@ -24,7 +27,21 @@
         </ul>
         {% endif %}
     </li>
+            <div class="start-course">
+        <a href="{% url 'module_detail' module.id %}">
+    <button>Начать прохождение</button></a>
     {% endfor %}
-</ul>
 
+
+    </div>
+</ul>
+</div>
+    {% if course.photo %}
+    <div class="photo-course">
+                    <img src="{{ course.photo.url }}" alt="{{ course.title }} " width="400px;">
+                {% else %}
+                    <p>Фото не доступно</p>
+                {% endif %}
+    </div>
+</div>
 {% endblock %}

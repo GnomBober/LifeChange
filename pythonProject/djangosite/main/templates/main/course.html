@@ -56,7 +56,9 @@
                                 {% endif %}
                             </label>
                         </div>
+                        <div class="btn-save">
                         <button type="submit" style="margin-top: 10px;">Сохранить изменения</button>
+                        </div>
                     </form>
                 {% endif %}
             </div>
@@ -71,11 +73,14 @@
                         Купить
                     </a>
                 {% endif %}
+                    <div class="edit-course">
+                    {% if request.user.is_authenticated and course in request.user.profile.created_courses.all %}
+                    <a href="{% url 'edit_course' course.id %}" class="href-edit">
+                        <button>Редактировать</button>
+                    </a>
+                {% endif %}
+                    </div>
             </div>
         </div>
-        {% if request.user.is_authenticated and course in request.user.profile.created_courses.all %}
-            <a href="{% url 'edit_course' course.id %}" class="btn btn-edit">Редактировать</a>
-        {% endif %}
-    </div>
 </div>
 {% endblock %}

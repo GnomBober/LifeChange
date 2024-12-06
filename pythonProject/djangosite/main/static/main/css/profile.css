@@ -129,10 +129,7 @@ margin:  10px auto 10px 10%;
   cursor:pointer;
   transition: 0.3s ease;
 }
-/*.buy:hover {
-   background-color: #1E7153;
-    transform: scale(1.02);
-}*/
+
 .buy.active {
    background-color: #1E7153;
    transform: scale(1.05);

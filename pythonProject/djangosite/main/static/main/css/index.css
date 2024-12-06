@@ -238,7 +238,7 @@ position:absolute;
 }
 
 .main {
-    padding: 0 5% 0 5%;
+    padding: 0 5% 5% 5%;
 }
 .Lifechange {
     padding: 50px 0 0 50px;
@@ -426,7 +426,7 @@ grid-gap: 24px;
 }
 .course-cardd {
 
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,100,0.2);
     transition:0.3s;
     border-radius: 5px;
     width: 250px;
@@ -448,7 +448,7 @@ grid-gap: 24px;
 }
 
 .course-cardd:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 215, .3);
 }
 
 .course-cardd p {
@@ -577,7 +577,7 @@ pointer-events: auto;
     background-color: white;
     border-radius: 8px;
     overflow: hidden; /* Обрезать лишнее, чтобы не вылазило */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px 0 rgba(0,0,100,0.2);
 
     transition: transform 0.3s ease;
 }
@@ -847,6 +847,155 @@ input[type="range"]::-moz-range-thumb {
 
 footer {
     margin-top: auto;
-    background-color: blue;
+    height:200px;
+    background-color: #F3F3F3;
     width:100%;
+    padding: 30px 100px;
+    display:flex;
+    justify-content: space between;
+}
+
+footer p {
+    font-size:16px;
+}
+.footer-main {
+    width: 30%;
+}
+
+.help {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+}
+
+.link-web {
+display:flex;
+justify-content: center;
+    color:gray;
+    flex-wrap:wrap;
+    font-size: 32px;
+    height: 32px;
+    padding:20px 0;
+    width:30%;
+}
+.href-vk {
+    color: gray;
+    cursor:pointer;
+    transition: 0.3s ease;
+}
+
+.href-vk:hover {
+    color:#0077FF;
+    transform: scale(1.05);
+}
+
+.href-tg {
+    color: gray;
+    margin: 0 15px;
+    cursor:pointer;
+    transition: 0.3s ease;
+
+}
+.href-tg:hover {
+    color:#29A9EA;
+    transform: scale(1.05);
+}
+
+.tg {
+    margin-left: 15px;
+}
+
+.href-gmail {
+    color: gray;
+    cursor:pointer;
+    transition: 0.3s ease;
+}
+
+.href-gmail:hover {
+    color:blue;
+    transform: scale(1.05);
+}
+
+.course-progress {
+    display:flex;
+    justify-content: space between;
+}
+
+.photo-course  {
+width: 50%;
+    display:flex;
+    justify-content: center;
+}
+.modules-course {
+    padding: 50px 100px;
+    width:50%;
+}
+.text-module {
+    padding: 10px 15px;
+}
+.text-module p {
+    font-size: 20px;
+    color: black;
+}
+
+.start-course button {
+    padding: 10px 15px;
+    background-color: #04AA6D;
+    border-radius: 15px;
+    border: none;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.start-course button:hover {
+    background-color: #1E7153;
+}
+
+.back-btn {
+    padding: 10px 15px;
+}
+.back-btn button {
+    padding: 10px 15px;
+    background-color: #04AA6D;
+    border-radius: 15px;
+    border: none;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.back-btn button:hover {
+    background-color: #1E7153;
+}
+
+input#title[name="title"] {
+
+    padding: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+form textarea#content {
+
+    padding: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+select[name="parent_id"] {
+
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.edit-module-course {
+
 }

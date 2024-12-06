@@ -96,6 +96,7 @@ margin:  10px auto 10px 10%;
   border: none;
   border-radius:10px;
   transition: 0.3s;
+  text-decoration: none;
 }
 .buy:hover {
    background-color: #1E7153;
@@ -175,4 +176,50 @@ padding-bottom: 50px;
 
 .language {
     padding-bottom: 50px;
+}
+
+
+.btn-save {
+
+}
+.btn-save button {
+    padding: 10px 15px;
+    overline:none;
+    background-color: #7BCA38;
+    border-radius: 15px;
+    border: none;
+    color:white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.btn-save button:hover {
+    background-color: #59AE10;
+}
+
+
+.edit-course button {
+    width: 300px;
+    height: 45px;
+    margin:  10px auto 10px 10%;
+    display:flex;
+    justify-content:center;
+    background-color: #FF9D00;
+  color: white;
+  align-items: center;
+  bottom: 50px;
+  border: none;
+  border-radius:10px;
+  transition: 0.3s;
+}
+.edit-course button:hover {
+   background-color: #D78707;
+    transform: scale(1.02);
+
+}
+
+.edit-course {
+
+}
+.href-edit {
+    text-decoration: none;
 }

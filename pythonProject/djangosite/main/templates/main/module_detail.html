@@ -9,8 +9,9 @@
 
 {% block content %}
 <h1>{{ module.title }}</h1>
+<div class="text-module">
 <p>{{ module.content }}</p>
-
+</div>
 {% if submodules %}
 <h2>Подмодули:</h2>
 <ul>
@@ -24,7 +25,9 @@
 <p>Нет подмодулей.</p>
 {% endif %}
 
-<div>
-    <a href="{% url 'course_progress' module.course.id %}" class="btn">Назад к курсу</a>
+<div class="back-btn">
+    <a href="{% url 'course_progress' module.course.id %}">
+       <button>Вернуться к курсу</button>
+    </a>
 </div>
 {% endblock %}

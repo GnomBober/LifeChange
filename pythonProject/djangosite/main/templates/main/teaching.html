@@ -20,6 +20,7 @@
             {% csrf_token %}
             <div class="form-reg">
                 <div class="name-title">
+                    {{form.title}}
                     <input type="text" name="form.title" placeholder="Введите название курса"  >
                     </div>
                 </div>
@@ -40,7 +41,8 @@
                     {{ form.photo }}
                    <input type="file" name="photo" class="custom-photo" id="id_photo">
                     <label for="id_photo" class="custom-file-label" id="file-label">Выберите изображение</label>
-                <div>
+                    </div>
+                    <div>
                     <label for="id_tags">Теги:</label>
                     {{ form.tags }}
                 </div>
@@ -51,8 +53,8 @@
                 </div>
 
                 <button type="submit" class="reg">Создать курс</button>
-
         </form>
+
     {% endif %}
 
     <div class="login-lostpass">

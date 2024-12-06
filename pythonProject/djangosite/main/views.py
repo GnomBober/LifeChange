@@ -52,10 +52,16 @@ def search_view(request):
 
     if form.is_valid():
         query = form.cleaned_data['query']
-        results = Course.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(tags__name__icontains=query))
-        print(results)
-    return render(request, 'main/search.html', {'form': form, 'query': query, 'results': results})
+        results = Course.objects.filter(
+            title__icontains=query
+        ) | Course.objects.filter(
+            description__icontains=query
+        ) | Course.objects.filter(
+            tags__name__icontains=query
+        )
+        results = results.distinct()  # Убираем дубликаты
 
+    return render(request, 'main/search.html', {'form': form, 'query': query, 'results': results})
 # Регистрация пользователя
 def register(request):
     if request.method == 'POST':
@@ -144,19 +150,19 @@ def filter_courses(request):
     return JsonResponse({'courses': course_data})
 
 def teaching_page(request):
-    # Проверяем, есть ли профиль и является ли пользователь учителем
     if hasattr(request.user, 'profile') and request.user.profile.isTeacher:
         if request.method == 'POST':
             form = CourseForm(request.POST, request.FILES)
             if form.is_valid():
-                course = form.save(commit=False)
-                course.save()
-                form.save_m2m()  # Сохраняем связи для ManyToMany полей
+                course = form.save(commit=False)  # Создаем объект, но не сохраняем в базу
+                course.save()  # Сохраняем объект
+                form.save_m2m()  # Сохраняем связи ManyToMany
 
+                # Добавляем курс в профиль пользователя
                 request.user.profile.created_courses.add(course)
                 request.user.profile.save()
 
-                return redirect('catalog')  # Перенаправляем на каталог после успешного создания
+                return redirect('catalog')  # Перенаправляем после успешного сохранения
         else:
             form = CourseForm()
         return render(request, 'main/teaching.html', {'form': form})
@@ -257,9 +263,8 @@ def course_progress(request, id):
 
 def module_detail(request, id):
     module = get_object_or_404(Module, id=id)
-    is_creator = course in profile.created_courses.all()
     submodules = Module.objects.filter(parent=module).order_by('order')  # Дочерние модули
-    return render(request, 'main/module_detail.html', {'module': module, 'submodules': submodules, 'is_creator': is_creator})
+    return render(request, 'main/module_detail.html', {'module': module, 'submodules': submodules})
 
 def get_course_tree(course):
     """Функция для получения дерева модулей и подмодулей курса."""

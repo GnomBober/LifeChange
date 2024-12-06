@@ -63,6 +63,12 @@ class CourseForm(forms.ModelForm):
         fields = ['title', 'difficulty_level', 'price', 'language', 'photo', 'description', 'tags']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),  # Удобное отображение для ManyToManyField
+
+            'title': forms.TextInput(attrs={
+                'placeholder': 'Название курса',
+                'class': 'name-title',
+            }),
+
             'description': forms.Textarea(attrs={
                 'placeholder':'Описание курса',
                 'class':'custom-textarea',
@@ -101,3 +107,15 @@ class ModuleForm(forms.ModelForm):
     class Meta:
         model = Module
         fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs = {
+               'placeholder': 'Название модуля',
+                'class':'module-title',
+            }),
+            'content': forms.Textarea(attrs={
+                'placeholder':'Описание урока',
+                'class':'module-content',
+            })
+
+
+        }
