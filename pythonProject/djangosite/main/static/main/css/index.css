@@ -344,6 +344,7 @@ position: relative;
     padding: 20px 25px;
     display: grid;
     grid-template-columns: 100%;
+    width: 60%;
 }
 
 .course {
@@ -998,4 +999,7 @@ select[name="parent_id"] {
 
 .edit-module-course {
 
+}
+.result {
+    margin: 30px 60px;
 }

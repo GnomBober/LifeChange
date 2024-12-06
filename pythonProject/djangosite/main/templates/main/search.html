@@ -6,12 +6,74 @@
 {% endblock %}
 
 {% block content %}
-
-<div style="margin-top:20px; margin-left:3%;">
+<div class="result">
+<h2>Результаты для "{{ query }}":</h2>
+</div>
+<div class="main-catalog" style="margin-top:20px; margin-left:3%;">
     <!-- Результаты поиска -->
 
+    <div class="filter">
+        <div class="filter-difficult">
+            <h2>Уровень сложности</h2>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                <label class="form-check-label" for="flexCheckDefault">Для начинающих</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2">
+                <label class="form-check-label" for="flexCheckChecked">Для уверенных</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3">
+                <label class="form-check-label" for="flexCheckChecked">Для профи</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4">
+                <label class="form-check-label" for="flexCheckChecked">Для всех</label>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card-content">
+                <h2>Цена</h2>
+               <div class="price-input">
+        <div class="field">
+          <span>Мин</span>
+          <input type="number" class="input-min" value="0">
+        </div>
+        <div class="separator">-</div>
+        <div class="field">
+          <span>Макс</span>
+          <input type="number" class="input-max" value="7500">
+        </div>
+      </div>
+      <div class="slider">
+        <div class="progress"></div>
+      </div>
+      <div class="range-input">
+        <input type="range" class="range-min" min="0" max="10000" value="0" step="100">
+        <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+      </div>
+    </div>
+            </div>
+
+        <div class="filter-language">
+            <h2>Язык</h2>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">Русский</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked6">
+                <label class="form-check-label" for="flexCheckChecked">Английский</label>
+            </div>
+            <div>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">Любой</label>
+            </div>
+        </div>
+    </div>
     {% if query %}
-        <h2>Результаты для "{{ query }}":</h2>
     <div class="column-search">
             <div style="flex-grow: 1; gap: 5px">
                 {% if results %}
