@@ -106,16 +106,44 @@ class PaymentForm(forms.Form):
 class ModuleForm(forms.ModelForm):
     class Meta:
         model = Module
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'video_url']
         widgets = {
-            'title': forms.TextInput(attrs = {
-               'placeholder': 'Название модуля',
-                'class':'module-title',
+            'title': forms.TextInput(attrs={
+                'placeholder': 'Название модуля',
+                'class': 'module-title',
             }),
             'content': forms.Textarea(attrs={
-                'placeholder':'Описание урока',
-                'class':'module-content',
-            })
-
-
+                'placeholder': 'Описание урока',
+                'class': 'module-content',
+            }),
+            'video_url': forms.URLInput(attrs={
+                'placeholder': 'Ссылка на видео (например, из VK)',
+                'class': 'module-video-url',
+            }),
         }
+
+class CourseFilterForm(forms.Form):
+    DIFFICULTY_CHOICES = [
+        ('beginner', 'Для начинающих'),
+        ('intermediate', 'Для уверенных'),
+        ('advanced', 'Для профи'),
+        ('all', 'Для всех'),
+    ]
+    LANGUAGE_CHOICES = [
+        ('ru', 'Русский'),
+        ('en', 'Английский'),
+        ('any', 'Любой'),
+    ]
+
+    difficulty_level = forms.MultipleChoiceField(
+        choices=DIFFICULTY_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    language = forms.MultipleChoiceField(
+        choices=LANGUAGE_CHOICES,
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    min_price = forms.IntegerField(required=False, min_value=0, label='Мин. цена')
+    max_price = forms.IntegerField(required=False, min_value=0, label='Макс. цена')

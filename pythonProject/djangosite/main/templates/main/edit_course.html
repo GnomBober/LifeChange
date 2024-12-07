@@ -47,38 +47,27 @@
         <h3>Добавить новый модуль</h3>
         <form method="post">
             {% csrf_token %}
-<!--            <label for="title">Заголовок модуля:</label>-->
-<!--            <input type="text" name="title" id="title" required><br>-->
-<!--            <label for="content">Содержание:</label><br>-->
-<!--            <textarea name="content" id="content" rows="4" cols="50" required></textarea><br>-->
-
-<!--            <label for="parent_id">Родительский модуль (если есть):</label>-->
-<!--            <select name="parent_id" id="parent_id">-->
-<!--                <option value="">Нет родительского модуля</option>-->
-<!--                {% for module in modules %}-->
-<!--                    <option value="{{ module.id }}">{{ module.title }}</option>-->
-<!--                {% endfor %}-->
-<!--            </select><br>-->
             <div class="edit-module-course">
-<!--                {{ form.title }}-->
                 <div class="text-input">
-                <input type="text" name="title" id="title" required placeholder="Название модуля">
+                    <input type="text" name="title" id="title" required placeholder="Название модуля">
                 </div>
+                <textarea name="content" id="content" rows="4" cols="50" required placeholder="Содержание модуля"></textarea><br>
+                <label for="parent_id">Родительский модуль (если есть):</label>
+                <select name="parent_id" id="parent_id">
+                    <option value="">Нет родительского модуля</option>
+                    {% for module in modules %}
+                        <option value="{{ module.id }}">{{ module.title }}</option>
+                    {% endfor %}
+                </select><br>
 
-<!--            {{form.content}}-->
-            <textarea name="content" id="content" rows="4" cols="50" required placeholder="Содержание модуля"></textarea><br>
-            <label for="parent_id">Родительский модуль (если есть):</label>
-            <select name="parent_id" id="parent_id">
-                <option value="">Нет родительского модуля</option>
-                {% for module in modules %}
-                    <option value="{{ module.id }}">{{ module.title }}</option>
-                {% endfor %}
-            </select><br>
-            <div class="back-btn">
-            <button type="submit">Добавить модуль</button>
-            </div>
+                <!-- Добавляем поле для ссылки на видео -->
+                <label for="video_url">Ссылка на видео (например, из VK):</label>
+                <input type="url" name="video_url" id="video_url" placeholder="Введите ссылку на видео"><br>
+
+                <div class="back-btn">
+                    <button type="submit">Добавить модуль</button>
+                </div>
             </div>
         </form>
     {% endif %}
 {% endblock %}
-

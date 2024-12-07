@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import TextInput, PasswordInput
 from django.http import JsonResponse
-from .forms import CourseForm, ModuleForm, PaymentForm, SearchForm, RegistrationForm
+from .forms import CourseForm, ModuleForm, PaymentForm, SearchForm, RegistrationForm, CourseFilterForm
 from django.urls import reverse
 from django.db.models import Q
 
@@ -281,3 +281,30 @@ def get_module_children(module):
     """Рекурсивная функция для получения дочерних элементов модуля."""
     children = module.children.all()
     return [{'module': child, 'children': get_module_children(child)} for child in children]
+
+def course_catalog(request):
+    courses = Course.objects.all()
+    form = CourseFilterForm(request.GET or None)
+
+    if form.is_valid():
+        # Фильтрация по уровню сложности
+        difficulty_levels = form.cleaned_data.get('difficulty_level')
+        if difficulty_levels:
+            if 'all' not in difficulty_levels:
+                courses = courses.filter(difficulty_level__in=difficulty_levels)
+
+        # Фильтрация по языку
+        languages = form.cleaned_data.get('language')
+        if languages:
+            if 'any' not in languages:
+                courses = courses.filter(language__in=languages)
+
+        # Фильтрация по цене
+        min_price = form.cleaned_data.get('min_price')
+        max_price = form.cleaned_data.get('max_price')
+        if min_price is not None:
+            courses = courses.filter(price__gte=min_price)
+        if max_price is not None:
+            courses = courses.filter(price__lte=max_price)
+
+    return render(request, 'main/catalog.html', {'form': form, 'courses': courses})

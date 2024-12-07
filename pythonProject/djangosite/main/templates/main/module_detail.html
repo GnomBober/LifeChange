@@ -10,8 +10,19 @@
 {% block content %}
 <h1>{{ module.title }}</h1>
 <div class="text-module">
-<p>{{ module.content }}</p>
+    <p>{{ module.content }}</p>
 </div>
+
+<!-- Выводим видео, если оно задано -->
+{% if module.video_url %}
+    <div class="module-video">
+        <h3>Видео:</h3>
+        <iframe src="https://vk.com/video_ext.php?oid={{ module.course.id }}&id={{ module.id }}&hash={{ module.video_url|default:'' }}"
+                width="640" height="360" frameborder="0" allowfullscreen>
+        </iframe>
+    </div>
+{% endif %}
+
 {% if submodules %}
 <h2>Подмодули:</h2>
 <ul>

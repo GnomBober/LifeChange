@@ -94,6 +94,7 @@ class Module(models.Model):
     parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0)  # Поле для порядка отображения
 
     class Meta:
