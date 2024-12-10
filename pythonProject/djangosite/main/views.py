@@ -249,6 +249,22 @@ def edit_course(request, id):
         Module.objects.create(course=course, parent=parent, title=title, content=content)
         return redirect('edit_course', id=course.id)
 
+    if request.method == 'POST' and not module_id:  # Добавление нового модуля
+        parent_id = request.POST.get('parent_id')
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        video_url = request.POST.get('video_url')  # Получаем видео URL
+        parent = Module.objects.get(id=parent_id) if parent_id else None
+
+        Module.objects.create(
+            course=course,
+            parent=parent,
+            title=title,
+            content=content,
+            video_url=video_url  # Сохраняем видео URL
+        )
+        return redirect('edit_course', id=course.id)
+
     return render(request, 'main/edit_course.html', {
         'course': course,
         'modules': modules,
@@ -261,11 +277,44 @@ def course_progress(request, id):
     modules = Module.objects.filter(course=course, parent=None).order_by('order')  # Верхнеуровневые модули
     return render(request, 'main/course_progress.html', {'course': course, 'modules': modules})
 
+# def module_detail(request, id):
+#     module = get_object_or_404(Module, id=id)
+#     submodules = Module.objects.filter(parent=module).order_by('order')  # Дочерние модули
+#     return render(request, 'main/module_detail.html', {'module': module, 'submodules': submodules})
+
 def module_detail(request, id):
     module = get_object_or_404(Module, id=id)
-    submodules = Module.objects.filter(parent=module).order_by('order')  # Дочерние модули
-    return render(request, 'main/module_detail.html', {'module': module, 'submodules': submodules})
 
+    # Получаем сабмодули текущего уровня
+    submodules = Module.objects.filter(parent=module).order_by('order')
+
+    # Логика определения текущего и следующего сабмодуля
+    current_submodule_id = request.GET.get('current_submodule')  # ID текущего сабмодуля через GET
+    next_submodule = None
+
+    if submodules.exists():
+        if current_submodule_id:
+            try:
+                # Преобразуем список сабмодулей в Python-список для поиска индекса
+                submodules_list = list(submodules)
+                current_index = next(
+                    i for i, sub in enumerate(submodules_list) if sub.id == int(current_submodule_id)
+                )
+                # Если есть следующий сабмодуль в текущем уровне, выбираем его
+                if current_index + 1 < len(submodules_list):
+                    next_submodule = submodules_list[current_index + 1]
+            except (ValueError, StopIteration, IndexError):
+                # Если текущий сабмодуль не найден или индекс некорректен, ничего не делаем
+                pass
+        else:
+            # Если текущий сабмодуль не указан, берём первый сабмодуль текущего уровня
+            next_submodule = submodules.first()
+
+    return render(request, 'main/module_detail.html', {
+        'module': module,
+        'submodules': submodules,
+        'next_submodule': next_submodule,
+    })
 def get_course_tree(course):
     """Функция для получения дерева модулей и подмодулей курса."""
     modules = Module.objects.filter(course=course, parent=None)

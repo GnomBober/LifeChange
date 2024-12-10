@@ -24,84 +24,11 @@
     <h2>{{ profile.name }}</h2>
     <p>Возраст: {{ profile.age }}, {{ profile.city }}</p>
 
-    <!-- Кнопки для отображения курсов -->
-<!--    <div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">-->
-<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>-->
-<!--        <label class="btn btn-outline-success" for="vbtn-radio1">Прохожу</label>-->
-<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">-->
-<!--        <label class="btn btn-outline-success" for="vbtn-radio2">Любимые</label>-->
-<!--        <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">-->
-<!--        <label class="btn btn-outline-success" for="vbtn-radio3">Законченные</label>-->
-<!--    </div>-->
-<!--        <div class="btn-group-vertical" role="group" aria-label="Вертикальная группа кнопок">-->
-<!--            <button class="btn btn-outline-success" id="btn-in-progress">Прохожу</button>-->
-<!--            <button class="btn btn-outline-success" id="btn-favorite">Любимые</button>-->
-<!--            <button class="btn btn-outline-success" id="btn-completed">Законченные</button>-->
-<!--        </div>-->
-
         <div class="btns">
             <button class="buy active"  id="btn-in-progress" onclick="changeButtonState(this)">Прохожу</button>
             <button class="buy" id="btn-favorite" onclick="changeButtonState(this)">Любимые</button>
             <button class="buy" id="btn-completed" onclick="changeButtonState(this)">Законченные</button>
         </div>
-
-
-
-
-<!--    <div class="course-list">-->
-<!--        <h3>Проходящие курсы</h3>-->
-<!--        {% if profile.current_courses.exists %}-->
-<!--            {% for course in profile.current_courses.all %}-->
-<!--                <a href="{% url 'course_detail' course.id %}" class="course-card" >-->
-<!--                    <div class="mycard">-->
-<!--                        <img src="{{ course.photo.url }}" alt="Курс">-->
-<!--                        <div class="mycontainer">-->
-<!--                            <h3><b>{{ course.title }}</b></h3>-->
-<!--                            <h4>{{ course.author }}</h4> &lt;!&ndash; или курс может иметь связь с преподавателем &ndash;&gt;-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--            {% endfor %}-->
-<!--        {% else %}-->
-<!--            <p>Нет текущих курсов</p>-->
-<!--        {% endif %}-->
-
-<!--        <h3>Избранные курсы</h3>-->
-<!--        {% if profile.favorite_courses.exists %}-->
-<!--            {% for course in profile.favorite_courses.all %}-->
-<!--                <a href="{% url 'course_detail' course.id %}" class="course-card">-->
-<!--                    <div class="mycard">-->
-<!--                        <img src="{{ course.photo.url }}" alt="Курс" style="width: 50%; max-width: 200px;">-->
-<!--                        <div class="mycontainer">-->
-<!--                            <h3><b>{{ course.title }}</b></h3>-->
-<!--                            <h4>{{ course.author }}</h4>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--            {% endfor %}-->
-<!--        {% else %}-->
-<!--            <p>Нет избранных курсов</p>-->
-<!--        {% endif %}-->
-
-<!--        <h3>Завершенные курсы</h3>-->
-<!--        {% if profile.completed_courses.exists %}-->
-<!--            {% for course in profile.completed_courses.all %}-->
-<!--                <a href="{% url 'course_detail' course.id %}" class="course-card">-->
-<!--                    <div class="mycard">-->
-<!--                        <img src="{{ course.photo.url }}" alt="Курс" style="width: 50%; max-width: 200px;">-->
-<!--                        <div class="mycontainer">-->
-<!--                            <h3><b>{{ course.title }}</b></h3>-->
-<!--                            <h4>{{ course.author }}</h4>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </a>-->
-<!--            {% endfor %}-->
-<!--        {% else %}-->
-<!--            <p>Нет завершенных курсов</p>-->
-<!--        {% endif %}-->
-<!--        </div>-->
-<!--    </div>-->
-
     </div>
 
     <div class="mycourse">

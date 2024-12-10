@@ -345,6 +345,7 @@ position: relative;
     display: grid;
     grid-template-columns: 100%;
     width: 60%;
+    width: 60%;
 }
 
 .course {
@@ -918,6 +919,7 @@ justify-content: center;
 }
 
 .course-progress {
+    padding: 3% 0;
     display:flex;
     justify-content: space between;
 }
@@ -926,16 +928,24 @@ justify-content: center;
 width: 50%;
     display:flex;
     justify-content: center;
+
+}
+
+.photo-course img {
+    border-raduis: 15px;
 }
 .modules-course {
     padding: 50px 100px;
     width:50%;
+    background-color:#F4F5FA;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,255,0.2);
 }
 .text-module {
-    padding: 10px 15px;
+    padding: 20px 10%;
 }
 .text-module p {
-    font-size: 20px;
+    font-size: 16px;
     color: black;
 }
 
@@ -954,9 +964,10 @@ width: 50%;
 }
 
 .back-btn {
-    padding: 10px 15px;
+
 }
-.back-btn button {
+
+.next-back-btn button {
     padding: 10px 15px;
     background-color: #04AA6D;
     border-radius: 15px;
@@ -966,7 +977,7 @@ width: 50%;
     transition: 0.3s ease;
 }
 
-.back-btn button:hover {
+.next-back-btn button:hover {
     background-color: #1E7153;
 }
 
@@ -1002,4 +1013,30 @@ select[name="parent_id"] {
 }
 .result {
     margin: 30px 60px;
+}
+
+.module-video {
+    display:flex;
+    justify-content: center;
+}
+
+.link-course-progress {
+    text-decoration: none;
+    overline: hidden;
+    color:black;
+}
+
+.link-course-progress-2 {
+    text-decoration: none;
+    overline: hidden;
+    color:black;
+}
+
+.next-back-btn {
+    display: flex;
+    padding: 10px 15px;
+}
+
+.next-btn {
+    margin-left:auto;
 }

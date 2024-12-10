@@ -37,7 +37,7 @@ p {
 }
 
 .mycard {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,255,0.2);
     transition:0.3s;
     border-radius: 5px;
     width: 400px;
@@ -48,7 +48,7 @@ overflow: hidden;
 
 }
 .mycard:hover {
-   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+   box-shadow: 0 8px 16px 0 rgba(0,0,255,0.3);
 }
 .mycard img {
    height: 125px;

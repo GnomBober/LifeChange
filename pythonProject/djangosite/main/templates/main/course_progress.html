@@ -1,5 +1,6 @@
 {% extends 'main/layout.html' %}
 {% load static %}
+{% load embed_video %}
 
 {% block title %}Прохождение курса: {{ course.title }}{% endblock %}
 
@@ -16,12 +17,12 @@
     {% for module in modules %}
     <li>
 
-        <a href="{% url 'module_detail' module.id %}">{{ module.title }}</a>
+        <a href="{% url 'module_detail' module.id %}" class="link-course-progress">{{ module.title }}</a>
         {% if module.children.all %}
         <ul>
             {% for submodule in module.children.all %}
             <li>
-                <a href="{% url 'module_detail' submodule.id %}">{{ submodule.title }}</a>
+                <a href="{% url 'module_detail' submodule.id %}" class="link-course-progress-2">{{ submodule.title }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -37,7 +38,7 @@
 </ul>
 </div>
     {% if course.photo %}
-    <div class="photo-course">
+        <div class="photo-course">
                     <img src="{{ course.photo.url }}" alt="{{ course.title }} " width="400px;">
                 {% else %}
                     <p>Фото не доступно</p>

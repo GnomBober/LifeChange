@@ -223,3 +223,7 @@ padding-bottom: 50px;
 .href-edit {
     text-decoration: none;
 }
+
+.have-course p {
+    font-size:18px;
+}

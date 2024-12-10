@@ -71,6 +71,8 @@ class Course(models.Model):
     tags = models.ManyToManyField(Tag, related_name='courses', blank=True)
 
 
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")  # Связь с пользователем
     name = models.CharField(max_length=100)  # Имя пользователя

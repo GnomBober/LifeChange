@@ -1,5 +1,6 @@
 {% extends 'main/layout.html' %}
 {% load static %}
+{% load embed_video %}
 
 {% block title %}Main page{% endblock %}
 
@@ -64,7 +65,9 @@
             </div>
         <div class="btns">
                 {% if has_course %}
+                    <div class="have-course">
                     <p>Вы уже приобрели этот курс</p>
+                    </div>
                     <a href="{% url 'course_progress' course.id %}" class="buy">
                         Перейти к прохождению
                     </a>

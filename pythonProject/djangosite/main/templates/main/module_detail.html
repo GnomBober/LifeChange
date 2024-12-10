@@ -1,5 +1,6 @@
 {% extends 'main/layout.html' %}
 {% load static %}
+{% load embed_video %}
 
 {% block title %}Main page{% endblock %}
 
@@ -9,20 +10,33 @@
 
 {% block content %}
 <h1>{{ module.title }}</h1>
+
+<!-- Выводим видео, если оно задано -->
+<!--{% if module.video_url %}-->
+<!--    <div class="module-video">-->
+<!--        <iframe src="https://vk.com/video_ext.php?oid={{ module.course.id }}&id={{ module.id }}&hash={{ module.video_url|default:'' }}"-->
+<!--                width="640" height="360" frameborder="0" allowfullscreen>-->
+<!--        </iframe>-->
+<!--    </div>-->
+<!--{% endif %}-->
+
+     {% if module.video_url %}
+            <div class="module-video">
+                <iframe
+                    width="560"
+                    height="315"
+                    src="{{ module.video_url | embed_video_url }}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        {% endif %}
+
+
 <div class="text-module">
     <p>{{ module.content }}</p>
 </div>
-
-<!-- Выводим видео, если оно задано -->
-{% if module.video_url %}
-    <div class="module-video">
-        <h3>Видео:</h3>
-        <iframe src="https://vk.com/video_ext.php?oid={{ module.course.id }}&id={{ module.id }}&hash={{ module.video_url|default:'' }}"
-                width="640" height="360" frameborder="0" allowfullscreen>
-        </iframe>
-    </div>
-{% endif %}
-
 {% if submodules %}
 <h2>Подмодули:</h2>
 <ul>
@@ -36,9 +50,21 @@
 <p>Нет подмодулей.</p>
 {% endif %}
 
+<div class="next-back-btn">
 <div class="back-btn">
     <a href="{% url 'course_progress' module.course.id %}">
        <button>Вернуться к курсу</button>
     </a>
 </div>
+<div class="next-btn">
+   {% if next_submodule %}
+    <a href="{% url 'module_detail' next_submodule.id %}">
+        <button>Дальше</button>
+    </a>
+{% else %}
+    <p>Вы завершили текущий модуль.</p>
+{% endif %}
+</div>
+   </div>
+
 {% endblock %}

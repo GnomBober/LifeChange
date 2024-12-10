@@ -148,3 +148,8 @@ background-color: #d4edda;
     position:sticky;
     top:0;
 }
+
+.modal-catalog {
+    text-decoration:none;
+    color:black;
+}

@@ -1,5 +1,6 @@
 {% extends 'main/layout.html' %}
 {% load static %}
+{% load embed_video %}
 
 {% block title %}Редактирование курса{% endblock %}
 
@@ -42,6 +43,7 @@
         </form>
     {% endif %}
 
+
     <!-- Форма для добавления нового модуля -->
     {% if not module %}
         <h3>Добавить новый модуль</h3>
@@ -61,13 +63,36 @@
                 </select><br>
 
                 <!-- Добавляем поле для ссылки на видео -->
-                <label for="video_url">Ссылка на видео (например, из VK):</label>
-                <input type="url" name="video_url" id="video_url" placeholder="Введите ссылку на видео"><br>
+                <label for="video_url">Ссылка на видео (YouTube или ВКонтакте):</label>
+            <input type="url" name="video_url" id="video_url" placeholder="Введите ссылку на видео"><br>
 
-                <div class="back-btn">
+                <div class="next-back-btn">
                     <button type="submit">Добавить модуль</button>
                 </div>
+                {% for module in modules %}
+
             </div>
         </form>
+        <div class="next-back-btn">
+                    <a href="{% url 'course_progress' module.course.id %}">
+                        <button>Вернуться к курсу</button>
+                    </a>
+                </div>
+                {% endfor %}
     {% endif %}
+
+    <!-- Проигрыватель видео -->
+{% if module and module.video_url %}
+    <h3>Просмотр видео</h3>
+    <div class="video-player">
+        <iframe
+            width="560"
+            height="315"
+            src="{{ module.video_url | embed_video_url }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+{% endif %}
 {% endblock %}
